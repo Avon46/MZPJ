@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="麻煮MINI石頭火鍋 - 愛心公益數字管理系統">
+    <meta name="robots" content="noindex, nofollow">
+    <title>愛心公益數字管理 - 麻煮MINI石頭火鍋管理員介面</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .admin-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: var(--spacing-2xl);
+        }
+        
+        .admin-header {
+            text-align: center;
+            margin-bottom: var(--spacing-3xl);
+            padding: var(--spacing-2xl);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: white;
+            border-radius: var(--border-radius-lg);
+        }
+        
+        .admin-header h1 {
+            margin: 0;
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+        }
+        
+        .admin-header p {
+            margin: var(--spacing-md) 0 0 0;
+            opacity: 0.9;
+            font-size: var(--font-size-lg);
+        }
+        
+        .admin-section {
+            background: white;
+            padding: var(--spacing-2xl);
+            margin-bottom: var(--spacing-xl);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-border);
+        }
+        
+        .admin-section h2 {
+            color: var(--color-primary-dark);
+            margin-bottom: var(--spacing-lg);
+            font-size: var(--font-size-2xl);
+            border-bottom: 2px solid var(--color-accent);
+            padding-bottom: var(--spacing-sm);
+        }
+        
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: var(--spacing-sm);
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: var(--spacing-md);
+            border: 2px solid var(--color-border);
+            border-radius: var(--border-radius-md);
+            font-size: var(--font-size-base);
+            transition: border-color var(--transition-normal);
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(69, 129, 142, 0.1);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: var(--spacing-md) var(--spacing-xl);
+            border: none;
+            border-radius: var(--border-radius-md);
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-secondary {
+            background: var(--color-gray-medium);
+            color: var(--color-text-primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--color-gray-light);
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #218838;
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        
+        .current-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .stat-card {
+            background: var(--color-gray-light);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-md);
+            text-align: center;
+            border: 1px solid var(--color-border);
+        }
+        
+        .stat-number {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            color: var(--color-primary-dark);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .stat-label {
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+        }
+        
+        .message {
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-md);
+            margin-bottom: var(--spacing-lg);
+            font-weight: 500;
+        }
+        
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .message.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: var(--spacing-lg);
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .benefit-categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .benefit-category {
+            background: var(--color-gray-light);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--color-border);
+            text-align: center;
+        }
+        
+        .benefit-category h4 {
+            margin: 0 0 var(--spacing-sm) 0;
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        .benefit-category .stat-number {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            color: var(--color-primary-dark);
+        }
+        
+        .admin-section h3 {
+            color: var(--color-primary);
+            margin: var(--spacing-lg) 0 var(--spacing-md) 0;
+            font-size: var(--font-size-lg);
+            border-bottom: 1px solid var(--color-accent);
+            padding-bottom: var(--spacing-xs);
+        }
+        
+        .admin-section h3:first-child {
+            margin-top: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .admin-container {
+                padding: var(--spacing-lg);
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>🔐 管理員介面</h1>
+            <p>愛心公益數字管理系統</p>
+        </div>
+        
+        <!-- 測試 API 連接 -->
+        <div class="admin-section">
+            <h2>🧪 API 測試</h2>
+            <div class="action-buttons">
+                <button class="btn btn-info" onclick="testAPIConnection()">🔗 測試 API 連接</button>
+                <button class="btn btn-secondary" onclick="showAPIDetails()">📋 顯示 API 詳情</button>
+            </div>
+            <div id="apiTestResult" style="margin-top: var(--spacing-md);"></div>
+        </div>
+        
+        <!-- 當前狀態顯示 -->
+        <div class="admin-section">
+            <h2>📊 當前狀態</h2>
+            <div class="current-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="current-donation">...</div>
+                    <div class="stat-label">累積回饋金額</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="current-updated">...</div>
+                    <div class="stat-label">最後更新</div>
+                </div>
+            </div>
+            <button class="btn btn-secondary" onclick="refreshCurrentStats()">🔄 重新整理</button>
+        </div>
+        
+        <!-- 詳細優惠項目狀態 -->
+        <div class="admin-section">
+            <h2>📋 詳細優惠項目狀態</h2>
+            <div class="benefit-categories-grid">
+                <div class="benefit-category">
+                    <h4>目前總累積</h4>
+                    <div class="stat-number" id="current-total-donation">...</div>
+                </div>
+                <div class="benefit-category">
+                    <h4>視障/聽障人士</h4>
+                    <div class="stat-number" id="current-visually-impaired">...</div>
+                </div>
+                <div class="benefit-category">
+                    <h4>醫護人員證照</h4>
+                    <div class="stat-number" id="current-medical-staff">...</div>
+                </div>
+                <div class="benefit-category">
+                    <h4>孝順雙親</h4>
+                    <div class="stat-number" id="current-filial-piety">...</div>
+                </div>
+                <div class="benefit-category">
+                    <h4>馬祖身分/漁民證</h4>
+                    <div class="stat-number" id="current-matsu-resident">...</div>
+                </div>
+                <div class="benefit-category">
+                    <h4>新住民</h4>
+                    <div class="stat-number" id="current-new-resident">...</div>
+                </div>
+                <div class="benefit-category">
+                    <h4>淨灘/手作步道</h4>
+                    <div class="stat-number" id="current-beach-cleanup">...</div>
+                </div>
+                <div class="benefit-category">
+                    <h4>ALLPASS</h4>
+                    <div class="stat-number" id="current-allpass">...</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 更新表單 -->
+        <div class="admin-section">
+            <h2>✏️ 更新數字</h2>
+            <form id="updateForm">
+                <h3>基本統計</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="donation">累積回饋金額</label>
+                        <input type="number" id="donation" name="donation" min="0" placeholder="例如：800000">
+                    </div>
+                </div>
+                
+                <h3>詳細優惠項目</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="total-donation">自 2021 年起自當月已累計總優惠金額</label>
+                        <input type="number" id="total-donation" name="total_donation" min="0" placeholder="例如：800000">
+                    </div>
+                    <div class="form-group">
+                        <label for="visually-impaired">視障/聽障人士</label>
+                        <input type="number" id="visually-impaired" name="visually_impaired" min="0" placeholder="例如：500000">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="medical-staff">醫護人員證照</label>
+                        <input type="number" id="medical-staff" name="medical_staff" min="0" placeholder="例如：150000">
+                    </div>
+                    <div class="form-group">
+                        <label for="filial-piety">孝順雙親</label>
+                        <input type="number" id="filial-piety" name="filial_piety" min="0" placeholder="例如：4000">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="matsu-resident">馬祖身分/漁民證</label>
+                        <input type="number" id="matsu-resident" name="matsu_resident" min="0" placeholder="例如：1500">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-resident">新住民</label>
+                        <input type="number" id="new-resident" name="new_resident" min="0" placeholder="例如：2000">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="beach-cleanup">淨灘/手作步道</label>
+                        <input type="number" id="beach-cleanup" name="beach_cleanup" min="0" placeholder="例如：4500">
+                    </div>
+                    <div class="form-group">
+                        <label for="allpass">ALLPASS</label>
+                        <input type="number" id="allpass" name="allpass" min="0" placeholder="例如：90000">
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-primary">💾 儲存更新</button>
+                    <button type="button" class="btn btn-secondary" onclick="resetForm()">🔄 重置表單</button>
+                    <button type="button" class="btn btn-success" onclick="loadCurrentValues()">📥 載入當前值</button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- 快速操作 -->
+        <div class="admin-section">
+            <h2>⚡ 快速操作</h2>
+            <div class="action-buttons">
+                <button class="btn btn-success" onclick="quickUpdate('increase')">📈 增加 10%</button>
+                <button class="btn btn-secondary" onclick="quickUpdate('decrease')">📉 減少 10%</button>
+                <button class="btn btn-danger" onclick="resetToDefaults()">🔄 重置為預設值</button>
+            </div>
+        </div>
+        
+        <!-- 訊息顯示區域 -->
+        <div id="messageArea"></div>
+        
+        <!-- 返回連結 -->
+        <a href="{{ url_for('love') }}" class="back-link">← 返回愛心公益頁面</a>
+    </div>
+
+    <script>
+        class AdminManager {
+            constructor() {
+                this.init();
+            }
+            
+            init() {
+                this.loadCurrentStats();
+                this.setupEventListeners();
+            }
+            
+            setupEventListeners() {
+                const form = document.getElementById('updateForm');
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.updateStats();
+                });
+            }
+            
+            async loadCurrentStats() {
+                try {
+                    // 顯示載入中狀態
+                    this.showLoadingState();
+                    
+                    const response = await fetch('/api/love-stats');
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    
+                    const data = await response.json();
+                    this.displayCurrentStats(data);
+                    
+                    // 清除載入狀態
+                    this.clearLoadingState();
+                    
+                } catch (error) {
+                    console.error('Failed to load current stats:', error);
+                    this.showMessage('載入當前狀態失敗：' + error.message, 'error');
+                    
+                    // 顯示錯誤狀態
+                    this.showErrorState();
+                    
+                    // 清除載入狀態
+                    this.clearLoadingState();
+                }
+            }
+            
+            showLoadingState() {
+                // 在數字位置顯示載入中狀態
+                const elements = [
+                    'current-donation',
+                    'current-updated',
+                    'current-total-donation',
+                    'current-visually-impaired',
+                    'current-medical-staff',
+                    'current-filial-piety',
+                    'current-matsu-resident',
+                    'current-new-resident',
+                    'current-beach-cleanup',
+                    'current-allpass'
+                ];
+                
+                elements.forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element.textContent = '載入中...';
+                        element.style.opacity = '0.6';
+                    }
+                });
+            }
+            
+            clearLoadingState() {
+                // 恢復正常顯示狀態
+                const elements = [
+                    'current-donation',
+                    'current-updated',
+                    'current-total-donation',
+                    'current-visually-impaired',
+                    'current-medical-staff',
+                    'current-filial-piety',
+                    'current-matsu-resident',
+                    'current-new-resident',
+                    'current-beach-cleanup',
+                    'current-allpass'
+                ];
+                
+                elements.forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element.style.opacity = '1';
+                    }
+                });
+            }
+            
+            showErrorState() {
+                // 顯示錯誤狀態，使用靜態數據作為備用
+                const fallbackData = {
+                    donation: 714649,
+                    updatedAt: new Date().toISOString(),
+                    benefit_categories: {
+                        total_donation: 714649,
+                        visually_impaired: 488540,
+                        medical_staff: 133468,
+                        filial_piety: 3155,
+                        matsu_resident: 1160,
+                        new_resident: 1674,
+                        beach_cleanup: 3780,
+                        allpass: 78807
+                    }
+                };
+                
+                this.displayCurrentStats(fallbackData);
+                
+                // 在最後更新時間旁邊顯示錯誤提示
+                const updatedElement = document.getElementById('current-updated');
+                if (updatedElement) {
+                    updatedElement.innerHTML = `
+                        <span style="color: #dc3545;">載入失敗</span>
+                        <br>
+                        <small style="color: #6c757d;">顯示靜態數據</small>
+                    `;
+                }
+            }
+            
+            displayCurrentStats(data) {
+                // 更新累積回饋金額
+                const donationElement = document.getElementById('current-donation');
+                if (donationElement && data.donation !== undefined) {
+                    donationElement.textContent = this.formatNumber(data.donation);
+                }
+                
+                // 更新最後更新時間
+                const updatedElement = document.getElementById('current-updated');
+                if (updatedElement && data.updatedAt) {
+                    try {
+                        const updatedAt = new Date(data.updatedAt);
+                        updatedElement.textContent = updatedAt.toLocaleDateString('zh-TW', {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
+                    } catch (error) {
+                        console.error('Error parsing date:', error);
+                        updatedElement.textContent = '時間格式錯誤';
+                    }
+                } else if (updatedElement) {
+                    updatedElement.textContent = '無更新記錄';
+                }
+                
+                // 顯示詳細優惠項目
+                if (data.benefit_categories) {
+                    this.displayBenefitCategories(data.benefit_categories);
+                }
+            }
+            
+            displayBenefitCategories(categories) {
+                const categoryIds = {
+                    'total_donation': 'current-total-donation',
+                    'visually_impaired': 'current-visually-impaired',
+                    'medical_staff': 'current-medical-staff',
+                    'filial_piety': 'current-filial-piety',
+                    'matsu_resident': 'current-matsu-resident',
+                    'new_resident': 'current-new-resident',
+                    'beach_cleanup': 'current-beach-cleanup',
+                    'allpass': 'current-allpass'
+                };
+                
+                for (const [key, value] of Object.entries(categories)) {
+                    const elementId = categoryIds[key];
+                    if (elementId && document.getElementById(elementId)) {
+                        document.getElementById(elementId).textContent = this.formatNumber(value);
+                    }
+                }
+            }
+            
+            async updateStats() {
+                const formData = new FormData(document.getElementById('updateForm'));
+                const data = {};
+                
+                // 只更新有填寫的欄位
+                for (let [key, value] of formData.entries()) {
+                    if (value.trim() !== '') {
+                        data[key] = parseInt(value);
+                    }
+                }
+                
+                if (Object.keys(data).length === 0) {
+                    this.showMessage('請至少填寫一個欄位', 'error');
+                    return;
+                }
+                
+                try {
+                    const response = await fetch('/api/love-stats', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+                    
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error || `HTTP ${response.status}`);
+                    }
+                    
+                    const result = await response.json();
+                    this.showMessage('更新成功！', 'success');
+                    this.loadCurrentStats();
+                    this.resetForm();
+                    
+                } catch (error) {
+                    this.showMessage('更新失敗：' + error.message, 'error');
+                }
+            }
+            
+            loadCurrentValues() {
+                const currentStats = {
+                    donation: document.getElementById('current-donation').textContent
+                };
+                
+                // 移除千分位符號和加號
+                document.getElementById('donation').value = currentStats.donation.replace(/[,+]/g, '');
+                
+                // 載入詳細優惠項目到表單
+                this.loadBenefitCategoriesToForm();
+                
+                this.showMessage('已載入當前值到表單', 'info');
+            }
+            
+            loadBenefitCategoriesToForm() {
+                const categoryIds = {
+                    'total_donation': 'total-donation',
+                    'visually_impaired': 'visually-impaired',
+                    'medical_staff': 'medical-staff',
+                    'filial_piety': 'filial-piety',
+                    'matsu_resident': 'matsu-resident',
+                    'new_resident': 'new-resident',
+                    'beach_cleanup': 'beach-cleanup',
+                    'allpass': 'allpass'
+                };
+                
+                for (const [key, elementId] of Object.entries(categoryIds)) {
+                    const currentElement = document.getElementById(`current-${elementId}`);
+                    const formElement = document.getElementById(elementId);
+                    
+                    if (currentElement && formElement) {
+                        const value = currentElement.textContent.replace(/[,+]/g, '');
+                        formElement.value = value;
+                    }
+                }
+            }
+            
+            resetForm() {
+                document.getElementById('updateForm').reset();
+            }
+            
+            async quickUpdate(action) {
+                try {
+                    const response = await fetch('/api/love-stats');
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    
+                    const currentData = await response.json();
+                    const newData = {};
+                    
+                    if (action === 'increase') {
+                        newData.donation = Math.floor(currentData.donation * 1.1);
+                        
+                        // 更新詳細優惠項目
+                        if (currentData.benefit_categories) {
+                            newData.benefit_categories = {};
+                            for (const [key, value] of Object.entries(currentData.benefit_categories)) {
+                                newData.benefit_categories[key] = Math.floor(value * 1.1);
+                            }
+                        }
+                    } else if (action === 'decrease') {
+                        newData.donation = Math.floor(currentData.donation * 0.9);
+                        
+                        // 更新詳細優惠項目
+                        if (currentData.benefit_categories) {
+                            newData.benefit_categories = {};
+                            for (const [key, value] of Object.entries(currentData.benefit_categories)) {
+                                newData.benefit_categories[key] = Math.floor(value * 0.9);
+                            }
+                        }
+                    }
+                    
+                    const updateResponse = await fetch('/api/love-stats', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(newData)
+                    });
+                    
+                    if (!updateResponse.ok) {
+                        const errorData = await updateResponse.json();
+                        throw new Error(errorData.error || `HTTP ${updateResponse.status}`);
+                    }
+                    
+                    this.showMessage(`${action === 'increase' ? '增加' : '減少'} 10% 成功！`, 'success');
+                    this.loadCurrentStats();
+                    
+                } catch (error) {
+                    this.showMessage('快速更新失敗：' + error.message, 'error');
+                }
+            }
+            
+            async resetToDefaults() {
+                if (!confirm('確定要重置為預設值嗎？')) return;
+                
+                const defaultData = {
+                    donation: 714649,
+                    benefit_categories: {
+                        total_donation: 714649,
+                        visually_impaired: 488540,
+                        medical_staff: 133468,
+                        filial_piety: 3155,
+                        matsu_resident: 1160,
+                        new_resident: 1674,
+                        beach_cleanup: 3780,
+                        allpass: 78807
+                    }
+                };
+                
+                try {
+                    const response = await fetch('/api/love-stats', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(defaultData)
+                    });
+                    
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error || `HTTP ${response.status}`);
+                    }
+                    
+                    this.showMessage('已重置為預設值！', 'success');
+                    this.loadCurrentStats();
+                    
+                } catch (error) {
+                    this.showMessage('重置失敗：' + error.message, 'error');
+                }
+            }
+            
+            formatNumber(num) {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '+';
+            }
+            
+            showMessage(message, type = 'info') {
+                const messageArea = document.getElementById('messageArea');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${type}`;
+                messageDiv.textContent = message;
+                
+                messageArea.innerHTML = '';
+                messageArea.appendChild(messageDiv);
+                
+                // 5秒後自動消失
+                setTimeout(() => {
+                    messageDiv.remove();
+                }, 5000);
+            }
+        }
+        
+        // 全域函數，讓按鈕可以呼叫
+        window.adminManager = new AdminManager();
+        
+        function refreshCurrentStats() {
+            window.adminManager.loadCurrentStats();
+        }
+        
+        function resetForm() {
+            window.adminManager.resetForm();
+        }
+        
+        function loadCurrentValues() {
+            window.adminManager.loadCurrentValues();
+        }
+        
+        function quickUpdate(action) {
+            window.adminManager.quickUpdate(action);
+        }
+        
+        function resetToDefaults() {
+            window.adminManager.resetToDefaults();
+        }
+    </script>
+</body>
+</html>

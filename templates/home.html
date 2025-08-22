@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="麻煮MINI石頭火鍋 - 提供獨門麻辣牛奶小鍋、招牌紅油麻辣小鍋等特色美食，結合愛心公益回饋社會">
+  <meta name="keywords" content="麻煮,MINI石頭火鍋,麻辣鍋,小火鍋,愛心公益,台北美食">
+  <meta name="author" content="麻煮MINI石頭火鍋">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="麻煮MINI石頭火鍋 - 首頁">
+  <meta property="og:description" content="麻煮MINI石頭火鍋 - 提供獨門麻辣牛奶小鍋、招牌紅油麻辣小鍋等特色美食，結合愛心公益回饋社會">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="{{ url_for('static', filename='img/logo/首頁大圖.jpg') }}">
+  <meta property="og:site_name" content="麻煮MINI石頭火鍋">
+  
+  <!-- 結構化資料 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "麻煮MINI石頭火鍋",
+    "description": "提供獨門麻辣牛奶小鍋、招牌紅油麻辣小鍋等特色美食的火鍋餐廳",
+    "servesCuisine": "火鍋",
+    "priceRange": "$$",
+    "telephone": "+886-2-xxxx-xxxx",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "台北市",
+      "addressCountry": "台灣"
+    }
+  }
+  </script>
+  
+  <title>麻煮MINI石頭火鍋</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="canonical" href="{{ request.url }}">
+</head>
+<body>
+
+<header class="header">
+  <div class="header__logo">
+    <!-- 改：首頁連結用 url_for('home')；圖片走 static -->
+    <a href="{{ url_for('home') }}" class="header__logo-link">
+      <img src="{{ url_for('static', filename='img/logo/MZ.jpg') }}"
+           alt="麻煮logo" class="header__logo-img" loading="lazy">
+    </a>
+  </div>
+
+  <!-- 中間選單 -->
+  <nav class="header__nav">
+    <ul class="header__nav-list">
+      <li class="header__nav-item"><a href="{{ url_for('about') }}" class="header__nav-link">關於麻煮</a></li>
+      <li class="header__nav-item"><a href="{{ url_for('menu') }}" class="header__nav-link">菜單資訊</a></li>
+      <li class="header__nav-item"><a href="{{ url_for('news') }}" class="header__nav-link">麻煮快訊</a></li>
+      <li class="header__nav-item"><a href="{{ url_for('love') }}" class="header__nav-link">愛心公益</a></li>
+    </ul>
+  </nav>
+
+  <!-- 漢堡選單 -->
+  <button class="hamburger" id="hamburger" aria-label="開啟選單"
+          aria-controls="mobile-nav" aria-expanded="false">
+    <span class="hamburger__line"></span>
+    <span class="hamburger__line"></span>
+    <span class="hamburger__line"></span>
+  </button>
+
+  <!-- 右邊 icon -->
+  <div class="header__icon">
+    <img src="{{ url_for('static', filename='img/logo/world.jpg') }}"
+         alt="世界圖標" class="header__icon-img" loading="lazy">
+    <div class="lang-switch" role="group" aria-label="語言切換">
+      <a href="#" class="lang-switch__btn lang-switch__btn--active" lang="zh-Hant" aria-current="true">中</a>
+      <a href="#" class="lang-switch__btn" lang="en">EN</a>
+    </div>
+  </div>
+</header>
+
+<!-- 手機版導航 -->
+<nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+  <button class="mobile-nav__close" id="mobile-nav-close">×</button>
+  <ul class="mobile-nav__list">
+    <li class="mobile-nav__item"><a href="{{ url_for('home') }}" class="mobile-nav__link is-active">首頁</a></li>
+    <li class="mobile-nav__item"><a href="{{ url_for('about') }}" class="mobile-nav__link">關於麻煮</a></li>
+    <li class="mobile-nav__item"><a href="{{ url_for('menu') }}" class="mobile-nav__link">菜單資訊</a></li>
+    <li class="mobile-nav__item"><a href="{{ url_for('news') }}" class="mobile-nav__link">麻煮快訊</a></li>
+    <li class="mobile-nav__item"><a href="{{ url_for('love') }}" class="mobile-nav__link">愛心公益</a></li>
+  </ul>
+</nav>
+
+<main class="main">
+  <section class="hero">
+    <!-- 注意：這個 div 背景圖請在 CSS 用 background 設定，見下方說明 -->
+    <div class="hero__banner"></div>
+
+    <div class="hero__description">
+      <p class="hero__description-title"><u>與你分享</u></p>
+      【源自台灣信仰媽祖為靈感，傳統石頭小火鍋結合多元麻香，帶來台式熱騰騰的幸福滋味。
+      <div class="hero__cta">
+        <a href="{{ url_for('about') }}#brand-story" class="hero__cta-btn">了解更多品牌故事</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 三大賣點區 -->
+  <section class="usp-section">
+    <div class="usp-container">
+      <div class="usp-item">
+        <div class="usp-icon">🍲</div>
+        <h3 class="usp-title">個人石頭鍋</h3>
+        <p class="usp-description">獨享美味，一人也能享受石頭火鍋的樂趣</p>
+      </div>
+      <div class="usp-item">
+        <div class="usp-icon">🌊</div>
+        <h3 class="usp-title">海洋守護品牌精神</h3>
+        <p class="usp-description">傳承媽祖精神，共享善行美德</p>
+      </div>
+      <div class="usp-item">
+        <div class="usp-icon">🥬</div>
+        <h3 class="usp-title">安心食材</h3>
+        <p class="usp-description">嚴選新鮮食材，為您把關每一口美味</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 快訊預覽區 -->
+  <section class="news-preview-section">
+    <div class="news-preview-container">
+      <h2 class="news-preview-title">最新快訊</h2>
+              <div class="news-preview-list" id="news-preview-list">
+          <!-- 新聞卡片將由 JavaScript 動態生成 -->
+        </div>
+      <div class="news-preview-cta">
+        <a href="{{ url_for('news') }}#latest" class="news-preview-cta-btn">看全部快訊</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 行動導流區 -->
+  <section class="cta-section">
+    <div class="cta-container">
+      <h2 class="cta-title">立即行動</h2>
+      <div class="cta-buttons">
+        <a href="{{ url_for('about') }}#store-info" class="cta-btn cta-btn--store">
+          <div class="cta-btn-icon">🏪</div>
+          <span class="cta-btn-text">找門市</span>
+        </a>
+        <a href="{{ url_for('menu') }}" class="cta-btn cta-btn--menu">
+          <div class="cta-btn-icon">📋</div>
+          <span class="cta-btn-text">菜單</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="company-info">
+    <h2 class="company-info__title">覓        食         鐵        邦        美        食        集        團        關        係        企        業</h2>
+  </section>
+
+  <!-- 關係企業 Logo：建議用迴圈產生；先給靜態版 -->
+  <section class="partners">
+    <img class="partners__logo" src="{{ url_for('static', filename='img/logo/MISS.webp') }}" alt="覓食logo" loading="lazy">
+    <img class="partners__logo" src="{{ url_for('static', filename='img/logo/SLT.webp') }}"  alt="香蓮logo" loading="lazy">
+    <img class="partners__logo" src="{{ url_for('static', filename='img/logo/CCT.webp') }}"  alt="周照子logo" loading="lazy">
+    <img class="partners__logo" src="{{ url_for('static', filename='img/logo/GM.webp') }}"   alt="甘妹弄堂logo" loading="lazy">
+    <img class="partners__logo" src="{{ url_for('static', filename='img/logo/CY.webp') }}"   alt="嗤尤logo" loading="lazy">
+    <img class="partners__logo" src="{{ url_for('static', filename='img/logo/FW.webp') }}"   alt="扶旺號logo" loading="lazy">
+    <img class="partners__logo" src="{{ url_for('static', filename='img/logo/SW.webp') }}"   alt="小旺號logo" loading="lazy">
+    <img class="partners__logo" src="{{ url_for('static', filename='img/logo/WY.webp') }}"   alt="威宇logo" loading="lazy">
+  </section>
+</main>
+
+<!-- 回到頂部按鈕 -->
+<button class="back-to-top" id="back-to-top" title="回到頂部">↑</button>
+
+<footer class="footer">
+  <p class="footer__text">© Powered and secured by MISS-TEPPAN</p>
+</footer>
+
+<!-- 新聞動態加載腳本 -->
+<script>
+  // 加載首頁新聞預覽（最新3則）
+  async function loadHomeNews() {
+    try {
+      const response = await fetch('/static/news.json');
+      const newsData = await response.json();
+      
+      const newsList = document.getElementById('news-preview-list');
+      if (!newsList) return;
+      
+      // 按日期排序（最新在前），日期相同時按 id 倒序
+      const sortedNews = newsData.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        if (dateA.getTime() === dateB.getTime()) {
+          return b.id - a.id; // 日期相同時，id 大的在前
+        }
+        return dateB - dateA; // 日期新的在前
+      });
+      
+      // 只顯示最新3則
+      const latestNews = sortedNews.slice(0, 3);
+      
+      newsList.innerHTML = latestNews.map(news => `
+        <div class="news-preview-item">
+          <div class="news-preview-item__image">
+            <img src="${news.image}" alt="${news.title}" loading="lazy">
+          </div>
+          <div class="news-preview-item__content">
+            <h3 class="news-preview-item-title">
+              ${news.title}
+            </h3>
+            <p class="news-preview-item-date">${news.date}</p>
+          </div>
+        </div>
+      `).join('');
+      
+    } catch (error) {
+      console.error('加載新聞數據失敗:', error);
+      // 發生錯誤時顯示預設內容
+      const newsList = document.getElementById('news-preview-list');
+      if (newsList) {
+        newsList.innerHTML = '<p style="text-align: center; color: #666;">載入新聞時發生錯誤，請稍後再試。</p>';
+      }
+    }
+  }
+  
+  // 頁面加載完成後執行
+  document.addEventListener('DOMContentLoaded', loadHomeNews);
+</script>
+
+<!-- 改：用 url_for 載入 JS -->
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

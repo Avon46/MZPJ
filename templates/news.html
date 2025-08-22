@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="麻煮迷你石頭鍋">
+  <title>麻煮快訊｜麻煮迷你石頭鍋</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<header class="header">
+  <div class="header__logo">
+    <a href="{{ url_for('home') }}" class="header__logo-link">
+      <img src="{{ url_for('static', filename='img/logo/MZ.jpg') }}" alt="麻煮logo" class="header__logo-img" loading="lazy">
+    </a>
+  </div>
+
+  <!-- 中間選單 -->
+  <nav class="header__nav">
+    <ul class="header__nav-list">
+      <li class="header__nav-item"><a href="{{ url_for('about') }}" class="header__nav-link">關於麻煮</a></li>
+      <li class="header__nav-item"><a href="{{ url_for('menu') }}" class="header__nav-link">菜單資訊</a></li>
+      <li class="header__nav-item"><a href="{{ url_for('news') }}" class="header__nav-link is-active">麻煮快訊</a></li>
+      <li class="header__nav-item"><a href="{{ url_for('love') }}" class="header__nav-link">愛心公益</a></li>
+    </ul>
+  </nav>
+
+  <!-- 漢堡選單 -->
+  <button class="hamburger" id="hamburger" aria-label="開啟選單" aria-controls="mobile-nav" aria-expanded="false">
+    <span class="hamburger__line"></span>
+    <span class="hamburger__line"></span>
+    <span class="hamburger__line"></span>
+  </button>
+
+  <!-- 右邊 icon -->
+  <div class="header__icon">
+    <img src="{{ url_for('static', filename='img/logo/world.jpg') }}" alt="世界圖標" class="header__icon-img" loading="lazy">
+    <div class="lang-switch" role="group" aria-label="語言切換">
+      <a href="#" class="lang-switch__btn lang-switch__btn--active" lang="zh-Hant" aria-current="true">中</a>
+      <a href="#" class="lang-switch__btn" lang="en">EN</a>
+    </div>
+  </div>
+</header>
+
+<!-- 手機版導航 -->
+<nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+  <button class="mobile-nav__close" id="mobile-nav-close">×</button>
+  <ul class="mobile-nav__list">
+    <li class="mobile-nav__item"><a href="{{ url_for('home') }}" class="mobile-nav__link">首頁</a></li>
+    <li class="mobile-nav__item"><a href="{{ url_for('about') }}" class="mobile-nav__link">關於麻煮</a></li>
+    <li class="mobile-nav__item"><a href="{{ url_for('menu') }}" class="mobile-nav__link">菜單資訊</a></li>
+    <li class="mobile-nav__item"><a href="{{ url_for('news') }}" class="mobile-nav__link is-active">麻煮快訊</a></li>
+    <li class="mobile-nav__item"><a href="{{ url_for('love') }}" class="mobile-nav__link">愛心公益</a></li>
+  </ul>
+</nav>
+
+<main class="main">
+  <!-- 首屏（Hero） -->
+  <section id="hero" class="hero news-hero">
+    <div class="news__banner"></div> <!-- 背景圖請在 CSS 設定，見下方 -->
+    <div class="hero__description news-hero__desc">
+      <h1 class="news-hero__title">麻煮快訊</h1>
+      <p class="news-hero__subtitle">最新消息・活動情報・優惠公告</p>
+      <a href="#latest" class="news-cta">查看最新訊息</a>
+    </div>
+  </section>
+
+
+
+  <!-- 最新公告 -->
+  <section id="latest" class="news-section news-latest">
+    <div class="news-section__container">
+      <h2 class="news-section__title">最新訊息</h2>
+      <p class="news-section__hint">近期消息將更新於此。</p>
+
+      <div class="news-list" id="news-list">
+        <!-- 新聞卡片將由 JavaScript 動態生成 -->
+      </div>
+      
+      <!-- 分頁容器 -->
+      <div id="news-pagination"></div>
+    </div>
+  </section>
+
+  <!-- 新聞詳情頁面容器 -->
+  <div id="news-detail-view" style="display: none;"></div>
+</main>
+
+<!-- 回到頂部按鈕 -->
+<button class="back-to-top" id="back-to-top" title="回到頂部">↑</button>
+
+<footer class="footer">
+  <p class="footer__text">© Powered and secured by MISS-TEPPAN</p>
+</footer>
+
+<!-- 新聞動態加載腳本 -->
+<script>
+  // 分頁相關變數
+  let currentPage = 1;
+  const itemsPerPage = 6;
+  let allNewsData = [];
+  
+  // 加載新聞頁面完整新聞列表
+  async function loadAllNews() {
+    try {
+      console.log('開始載入新聞數據...');
+      const response = await fetch('/static/news.json');
+      console.log('Response status:', response.status);
+      console.log('Response headers:', response.headers);
+      
+      // 檢查響應狀態
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      console.log('載入的新聞數據:', data);
+      console.log('數據類型:', typeof data);
+      console.log('是否為陣列:', Array.isArray(data));
+      
+      if (!Array.isArray(data)) {
+        throw new Error('新聞數據格式錯誤：不是陣列格式');
+      }
+      
+      if (data.length === 0) {
+        throw new Error('新聞數據為空');
+      }
+      
+      allNewsData = data;
+      console.log('設置 allNewsData 成功，長度:', allNewsData.length);
+      
+      // 按日期排序（最新在前），日期相同時按 id 倒序
+      allNewsData.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        if (dateA.getTime() === dateB.getTime()) {
+          return b.id - a.id; // 日期相同時，id 大的在前
+        }
+        return dateB - dateA; // 日期新的在前
+      });
+      
+      console.log('排序後的新聞數據:', allNewsData);
+      
+      // 顯示第一頁
+      displayNewsPage(1);
+      
+      // 創建分頁
+      createPagination();
+      
+      console.log('新聞載入和顯示完成');
+      
+    } catch (error) {
+      console.error('加載新聞數據失敗:', error);
+      console.error('錯誤詳情:', {
+        message: error.message,
+        stack: error.stack,
+        url: '/static/news.json'
+      });
+      
+      // 發生錯誤時顯示預設內容
+      const newsList = document.getElementById('news-list');
+      if (!newsList) {
+        console.error('找不到 news-list 元素，無法顯示錯誤信息');
+        return;
+      }
+      
+      // 顯示更詳細的錯誤信息
+      newsList.innerHTML = `
+        <div style="text-align: center; color: #666; padding: 2rem;">
+          <p>載入新聞時發生錯誤，請稍後再試。</p>
+          <p style="font-size: 0.9em; margin-top: 1rem;">
+            錯誤詳情：${error.message}
+          </p>
+          <button onclick="location.reload()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: var(--color-primary); color: white; border: none; border-radius: 4px; cursor: pointer;">
+            重新載入
+          </button>
+        </div>
+      `;
+    }
+  }
+  
+  // 顯示指定頁面的新聞
+  function displayNewsPage(page) {
+    console.log('顯示第', page, '頁新聞');
+    console.log('當前新聞數據:', allNewsData);
+    
+    const newsList = document.getElementById('news-list');
+    if (!newsList) {
+      console.error('找不到 news-list 元素');
+      return;
+    }
+    
+    if (!Array.isArray(allNewsData) || allNewsData.length === 0) {
+      console.error('新聞數據為空或格式錯誤');
+      newsList.innerHTML = '<p style="text-align: center; color: #666;">暫無新聞數據</p>';
+      return;
+    }
+    
+    // 更新當前頁面變數
+    currentPage = page;
+    console.log('設置當前頁面為:', currentPage);
+    
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const pageNews = allNewsData.slice(startIndex, endIndex);
+    
+    console.log('當前頁面新聞:', pageNews);
+    
+    // 生成新聞卡片 HTML
+    const newsCardsHTML = pageNews.map(news => `
+      <article class="news-card" id="news-${news.id}" data-news-id="${news.id}">
+        <div class="news-card__image">
+          <img src="${news.image}" alt="${news.title}" loading="lazy">
+        </div>
+        <div class="news-card__content">
+          <h3 class="news-card__title">${news.title}</h3>
+          <time class="news-card__time" datetime="${news.date}">${news.date}</time>
+        </div>
+      </article>
+    `).join('');
+    
+    console.log('生成的新聞卡片 HTML:', newsCardsHTML);
+    
+    // 設置 HTML 內容
+    newsList.innerHTML = newsCardsHTML;
+    
+    // 為每個新聞卡片添加點擊事件
+    addNewsCardClickEvents();
+    
+    // 更新分頁按鈕狀態
+    updatePaginationButtons();
+  }
+  
+  // 創建分頁按鈕
+  function createPagination() {
+    console.log('創建分頁，總新聞數:', allNewsData.length);
+    
+    if (!Array.isArray(allNewsData) || allNewsData.length === 0) {
+      console.log('新聞數據為空，不創建分頁');
+      return;
+    }
+    
+    const totalPages = Math.ceil(allNewsData.length / itemsPerPage);
+    console.log('總頁數:', totalPages);
+    
+    const paginationContainer = document.getElementById('news-pagination');
+    if (!paginationContainer) {
+      console.error('找不到分頁容器');
+      return;
+    }
+    
+    let paginationHTML = '<div class="news-pagination">';
+    
+    for (let i = 1; i <= totalPages; i++) {
+      paginationHTML += `
+        <button class="news-pagination__btn ${i === 1 ? 'is-active' : ''}" 
+                onclick="changePage(${i})" data-page="${i}">
+          ${i}
+        </button>
+      `;
+    }
+    
+    paginationHTML += '</div>';
+    paginationContainer.innerHTML = paginationHTML;
+    console.log('分頁創建完成');
+  }
+  
+  // 切換頁面
+  function changePage(page) {
+    displayNewsPage(page);
+    
+    // 更新分頁按鈕狀態
+    const buttons = document.querySelectorAll('.news-pagination__btn');
+    buttons.forEach(btn => {
+      btn.classList.remove('is-active');
+      if (parseInt(btn.dataset.page) === page) {
+        btn.classList.add('is-active');
+      }
+    });
+    
+    // 滾動到最新消息區域，而不是頁面頂部
+    const latestSection = document.getElementById('latest');
+    if (latestSection) {
+      latestSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+  
+  // 更新分頁按鈕狀態
+  function updatePaginationButtons() {
+    const buttons = document.querySelectorAll('.news-pagination__btn');
+    buttons.forEach(btn => {
+      btn.classList.remove('is-active');
+      if (parseInt(btn.dataset.page) === currentPage) {
+        btn.classList.add('is-active');
+      }
+    });
+  }
+  
+  // 詳情模式全域設定
+  const ENABLE_DETAIL = true;
+  const DETAIL_MODE = "hash"; // "inline" | "modal" | "hash"
+  
+  // 獲取當前滾動位置的輔助函數（兼容不同瀏覽器）
+  function getScrollPosition() {
+    return window.pageYOffset || 
+           document.documentElement.scrollTop || 
+           document.body.scrollTop || 
+           0;
+  }
+  
+  // 這些動畫函數已不再需要，保留註解以供參考
+  // function fadeOutListContent(callback) { ... }
+  // function fadeInListContent() { ... }
+  // function fadeOutDetailContent(callback) { ... }
+  // function fadeInDetailContent() { ... }
+  // function hideNonDetailContent() { ... }
+  // function showAllContent() { ... }
+  
+  // 詳情模式相關變數
+  let currentDetailId = null;
+  let detailFromPage = 1; // 記錄用戶是從哪一頁進入詳情的
+  let detailFromNewsId = null; // 記錄用戶點擊的新聞 ID
+  let detailFromScrollPosition = 0; // 記錄用戶進入詳情前的滾動位置
+  
+  // 為新聞卡片添加點擊事件
+  function addNewsCardClickEvents() {
+    const newsCards = document.querySelectorAll('.news-card');
+    console.log(`找到 ${newsCards.length} 個新聞卡片，開始綁定點擊事件...`);
+    
+    newsCards.forEach((card, index) => {
+      // 先獲取標題文字，避免 this 綁定問題
+      const titleElement = card.querySelector('.news-card__title');
+      const titleText = titleElement ? titleElement.textContent : '新聞標題';
+      const newsId = parseInt(card.dataset.newsId);
+      
+      console.log(`綁定卡片 ${index + 1}: ID=${newsId}, 標題="${titleText}"`);
+      
+      card.addEventListener('click', function() {
+        console.log(`點擊新聞卡片，ID: ${newsId}`);
+        openNewsDetail(newsId);
+      });
+      
+      // 鍵盤操作支援
+      card.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          console.log(`鍵盤觸發新聞詳情，ID: ${newsId}`);
+          openNewsDetail(newsId);
+        }
+      });
+      
+      // 設置可聚焦
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', `查看 ${titleText} 的詳細資訊`);
+    });
+    
+    console.log('新聞卡片點擊事件綁定完成');
+  }
+  
+  // 開啟新聞詳情
+  function openNewsDetail(newsId) {
+    console.log(`=== 開啟新聞詳情開始 ===`);
+    console.log(`新聞 ID: ${newsId}, 詳情模式: ${DETAIL_MODE}`);
+    
+    if (!ENABLE_DETAIL) {
+      console.error('詳情模式已禁用');
+      return;
+    }
+    
+    if (!newsId || isNaN(newsId)) {
+      console.error('無效的新聞 ID:', newsId);
+      return;
+    }
+    
+    currentDetailId = newsId;
+    detailFromPage = currentPage; // 記錄當前頁面
+    detailFromNewsId = newsId; // 記錄點擊的新聞 ID
+    detailFromScrollPosition = getScrollPosition(); // 記錄當前滾動位置
+    
+    console.log(`用戶從第 ${detailFromPage} 頁進入詳情，新聞 ID: ${newsId}`);
+    console.log(`記錄滾動位置: ${detailFromScrollPosition}px`);
+    
+    // 發送事件追蹤
+    window.dispatchEvent(new CustomEvent('news:open', { 
+      detail: { id: newsId, mode: DETAIL_MODE, fromPage: detailFromPage } 
+    }));
+    
+    switch (DETAIL_MODE) {
+      case "hash":
+        console.log('使用 Hash 路由模式');
+        openHashDetail(newsId);
+        break;
+      case "inline":
+        console.log('使用 Inline 模式');
+        openInlineDetail(newsId);
+        break;
+      case "modal":
+        console.log('使用 Modal 模式');
+        openModalDetail(newsId);
+        break;
+      default:
+        console.error('未知的詳情模式:', DETAIL_MODE);
+    }
+    
+    console.log(`=== 開啟新聞詳情完成 ===`);
+  }
+  
+  // Hash SPA 詳情模式
+  function openHashDetail(newsId) {
+    console.log(`設置 Hash 路由: #detail/${newsId}`);
+    window.location.hash = `detail/${newsId}`;
+  }
+  
+  // Inline 展開詳情模式
+  function openInlineDetail(newsId) {
+    // 關閉其他已展開的詳情
+    const existingDetails = document.querySelectorAll('.news-detail');
+    existingDetails.forEach(detail => detail.remove());
+    
+    const newsCard = document.getElementById(`news-${newsId}`);
+    if (!newsCard) return;
+    
+    const newsData = allNewsData.find(news => news.id === newsId);
+    if (!newsData) return;
+    
+    const detailHTML = createDetailHTML(newsData, "inline");
+    newsCard.insertAdjacentHTML('afterend', detailHTML);
+    
+    // 滾動到詳情區域
+    const detailElement = document.querySelector('.news-detail');
+    if (detailElement) {
+      detailElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+  
+  // Modal 對話框詳情模式
+  function openModalDetail(newsId) {
+    const newsData = allNewsData.find(news => news.id === newsId);
+    if (!newsData) return;
+    
+    const modalHTML = createDetailHTML(newsData, "modal");
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    
+    const modal = document.querySelector('.news-detail-modal');
+    const backdrop = document.querySelector('.news-detail-backdrop');
+    
+    // 聚焦到標題
+    const title = modal.querySelector('h2');
+    if (title) title.focus();
+    
+    // 關閉事件
+    backdrop.addEventListener('click', closeModal);
+    modal.querySelector('.news-detail-close').addEventListener('click', closeModal);
+    
+    // ESC 鍵關閉
+    document.addEventListener('keydown', handleModalKeydown);
+    
+    // 防止背景滾動
+    document.body.style.overflow = 'hidden';
+  }
+  
+  // 創建詳情 HTML
+  function createDetailHTML(newsData, mode) {
+    const content = newsData.content || '這則快訊目前僅提供摘要，完整內容將於近期更新。';
+    const image = newsData.image || '/static/img/logo/新聞大圖.jpg';
+    
+    if (mode === "modal") {
+      return `
+        <div class="news-detail-backdrop" role="presentation"></div>
+        <div class="news-detail-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title-${newsData.id}">
+          <button class="news-detail-close" aria-label="關閉詳情">×</button>
+          <div class="news-detail-content">
+            <h2 id="modal-title-${newsData.id}">${newsData.title}</h2>
+            <time class="news-detail-time" datetime="${newsData.date}">${newsData.date}</time>
+            <div class="news-detail-image">
+              <img src="${image}" alt="${newsData.title}" loading="lazy">
+            </div>
+            <div class="news-detail-text">
+              ${content}
+            </div>
+          </div>
+        </div>
+      `;
+    } else {
+      return `
+        <div class="news-detail" id="detail-${newsData.id}">
+          <div class="news-detail-content">
+            <h2>${newsData.title}</h2>
+            <time class="news-detail-time" datetime="${newsData.date}">${newsData.date}</time>
+            <div class="news-detail-image">
+              <img src="${image}" alt="${newsData.title}" loading="lazy">
+            </div>
+            <div class="news-detail-text">
+              ${content}
+            </div>
+            <button class="news-detail-close" aria-controls="detail-${newsData.id}">關閉詳情</button>
+          </div>
+        </div>
+      `;
+    }
+  }
+  
+  // 關閉 Modal
+  function closeModal() {
+    const modal = document.querySelector('.news-detail-modal');
+    const backdrop = document.querySelector('.news-detail-backdrop');
+    
+    if (modal) modal.remove();
+    if (backdrop) backdrop.remove();
+    
+    document.body.style.overflow = '';
+    document.removeEventListener('keydown', handleModalKeydown);
+  }
+  
+  // 處理 Modal 鍵盤事件
+  function handleModalKeydown(e) {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+  }
+  
+  // 處理 Hash 變化
+  function handleHashChange() {
+    const hash = window.location.hash;
+    console.log(`Hash 變化: ${hash}`);
+    
+    if (hash.startsWith('#detail/')) {
+      const newsId = parseInt(hash.split('/')[1]);
+      console.log(`檢測到詳情 Hash，新聞 ID: ${newsId}`);
+      showDetailPage(newsId);
+    } else {
+      // 返回列表頁面
+      console.log('Hash 變化，返回列表頁面');
+      showListPage();
+    }
+  }
+  
+  // 顯示詳情頁面
+  function showDetailPage(newsId) {
+    console.log(`開始顯示詳情頁面，新聞 ID: ${newsId}`);
+    
+    const newsData = allNewsData.find(news => news.id === newsId);
+    if (!newsData) {
+      console.error(`找不到 ID ${newsId} 的新聞數據`);
+      showListPage();
+      return;
+    }
+    
+    console.log('找到新聞數據:', newsData);
+    
+    // 隱藏新聞列表區域
+    const latestSection = document.querySelector('.news-latest');
+    if (latestSection) {
+      latestSection.style.display = 'none';
+      console.log('隱藏新聞列表區域');
+    }
+    
+    // 顯示詳情頁面
+    const detailPage = createDetailPageHTML(newsData);
+    const detailContainer = document.getElementById('news-detail-view');
+    if (detailContainer) {
+      detailContainer.innerHTML = detailPage;
+      detailContainer.style.display = 'block';
+      console.log('詳情頁面 HTML 已插入到專用容器');
+      
+      // 發送事件追蹤
+      window.dispatchEvent(new CustomEvent('news:view', { 
+        detail: { id: newsId } 
+      }));
+      
+      // 更新頁面標題
+      document.title = `${newsData.title} - 麻煮快訊`;
+      
+      console.log('詳情頁面顯示完成');
+    } else {
+      console.error('找不到 #news-detail-view 容器');
+    }
+  }
+  
+  // 顯示列表頁面
+  function showListPage() {
+    console.log('開始顯示列表頁面...');
+    
+    // 隱藏詳情頁面
+    const detailContainer = document.getElementById('news-detail-view');
+    if (detailContainer) {
+      detailContainer.style.display = 'none';
+      console.log('隱藏詳情頁面');
+    }
+    
+    // 顯示新聞列表區域
+    const latestSection = document.querySelector('.news-latest');
+    if (latestSection) {
+      latestSection.style.display = 'block';
+      console.log('顯示新聞列表區域');
+    }
+    
+    // 返回到用戶之前的分頁
+    if (detailFromPage && detailFromPage !== currentPage) {
+      console.log(`返回用戶之前的分頁: 第 ${detailFromPage} 頁`);
+      displayNewsPage(detailFromPage);
+      
+      // 更新分頁按鈕狀態
+      const buttons = document.querySelectorAll('.news-pagination__btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('is-active');
+        if (parseInt(btn.dataset.page) === detailFromPage) {
+          btn.classList.add('is-active');
+        }
+      });
+    }
+    
+    // 恢復滾動位置
+    if (detailFromScrollPosition > 0) {
+      setTimeout(() => {
+        console.log(`恢復滾動位置: ${detailFromScrollPosition}px`);
+        window.scrollTo({
+          top: detailFromScrollPosition,
+          behavior: 'smooth'
+        });
+      }, 100);
+    }
+    
+    // 恢復頁面標題
+    document.title = '麻煮快訊 - 最新公告';
+    
+    console.log('列表頁面顯示完成');
+  }
+  
+  // 創建詳情頁面 HTML
+  function createDetailPageHTML(newsData) {
+    const content = newsData.content || '這則快訊目前僅提供摘要，完整內容將於近期更新。';
+    const image = newsData.image || '/static/img/logo/新聞大圖.jpg';
+    
+    return `
+      <div class="news-detail-page">
+        <div class="news-detail-page__header">
+          <button class="news-back-btn" onclick="goBackToList()" aria-label="返回新聞列表">
+            ← 返回列表
+          </button>
+        </div>
+        <article class="news-detail-page__content">
+          <h1 class="news-detail-page__title">${newsData.title}</h1>
+          <time class="news-detail-page__time" datetime="${newsData.date}">${newsData.date}</time>
+          <div class="news-detail-page__image">
+            <img src="${image}" alt="${newsData.title}" loading="lazy">
+          </div>
+          <div class="news-detail-page__text">
+            ${content}
+          </div>
+        </article>
+      </div>
+    `;
+  }
+  
+  // 返回列表
+  function goBackToList() {
+    console.log('=== 返回列表頁面開始 ===');
+    console.log('用戶點擊返回按鈕，恢復滾動位置:', detailFromScrollPosition, 'px');
+    
+    // 直接調用 showListPage 函數，確保立即返回列表
+    showListPage();
+    
+    // 清除 hash，保持 URL 整潔
+    window.location.hash = '';
+    console.log('已直接返回列表頁面');
+  }
+  
+  // 頁面加載完成後執行
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('=== 頁面初始化開始 ===');
+    console.log('DOM 加載完成，開始初始化...');
+    
+    // 檢查必要的 DOM 元素
+    const newsList = document.getElementById('news-list');
+    const pagination = document.getElementById('news-pagination');
+    
+    console.log('news-list 元素:', newsList);
+    console.log('news-pagination 元素:', pagination);
+    
+    if (!newsList) {
+      console.error('找不到 news-list 元素');
+      return;
+    }
+    
+    if (!pagination) {
+      console.error('找不到 news-pagination 元素');
+      return;
+    }
+    
+    console.log('DOM 元素檢查完成，開始載入新聞...');
+    
+    // 延遲一下再載入新聞，確保頁面完全準備好
+    setTimeout(() => {
+      console.log('延遲載入新聞...');
+      loadAllNews();
+    }, 100);
+    
+    // 監聽 hash 變化
+    window.addEventListener('hashchange', handleHashChange);
+    
+    // 初始檢查 hash
+    if (window.location.hash) {
+      handleHashChange();
+    }
+    
+    console.log('初始化完成');
+  });
+</script>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

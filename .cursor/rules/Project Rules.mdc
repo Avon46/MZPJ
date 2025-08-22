@@ -1,0 +1,94 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+標題： Backend 部署規則（Render／Railway，Flask / Django 通用）
+
+內容：
+
+本專案將可一鍵部署到 Render（優先） 或 Railway（備用）。
+
+目標：自動生成並維護部署所需檔案與設定，支援 Flask 或 Django。
+
+變數：
+
+FRAMEWORK: "flask" 或 "django"（請以專案實際框架為準）
+
+PYTHON_VERSION: 3.11
+
+APP_PORT: 由平台注入的 $PORT（本地預設 8000）
+
+SERVICE_NAME: 服務名稱（例如 maze-backend）
+
+必要檔案（依 FRAMEWORK 自動生成 & 管理）：
+
+requirements.txt
+
+Flask：flask, gunicorn, python-dotenv
+
+Django：Django, gunicorn, whitenoise, psycopg2-binary, python-dotenv
+
+Procfile（Heroku / Railway 相容）：
+
+Flask：web: gunicorn app:app --bind 0.0.0.0:$PORT（若入口不同需自動偵測/同步）
+
+Django：web: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT（config為專案根設定目錄）
+
+Dockerfile（單階段即可；平台不強依 Docker 仍保留）：
+
+使用 PYTHON_VERSION，安裝 requirements，建立非 root 使用者，暴露 $PORT，CMD 與 Procfile一致
+
+render.yaml（Render 優先）：
+
+service type: web, env: python, build command：pip install -r requirements.txt +（Django 時）python manage.py collectstatic --noinput/migrate
+
+start command：與 Procfile 同步
+
+auto-deploy: true
+
+railway.json 或 railway 設定說明（若使用 Railway）：
+
+指定 start command 與 PORT 映射、環境變數
+
+.env.example：列出需要的環境變數
+
+通用：PORT=8000（本地），ENV=production
+
+Flask：如 FLASK_ENV, SECRET_KEY
+
+Django：DJANGO_SECRET_KEY, DJANGO_DEBUG, ALLOWED_HOSTS, DATABASE_URL
+
+健康檢查端點：
+
+Flask：提供 /healthz route，回傳 200 + JSON {status:"ok"}
+
+Django：提供 /healthz view + url，回傳同上（不需認證）
+
+靜態檔：
+
+Django 必須整合 Whitenoise（MIDDLEWARE 與 STATIC_ROOT/STATIC_URL 設定、collectstatic）
+
+日誌：
+
+統一輸出到 stdout，Gunicorn 使用 --access-logfile - --error-logfile -
+
+本地開發（自動生成 README 區段與 .vscode/launch.json）：
+
+Flask：python app.py 或 flask run --port 8000
+
+Django：python manage.py runserver 0.0.0.0:8000
+
+.env 自動載入（python-dotenv）
+
+接受標準（每次調整後自動檢查）：
+
+npm run lint（若前端存在）與 python -m pyflakes（或 ruff）無嚴重錯誤
+
+本地 PORT=8000 可啟動，/healthz 回 200
+
+Render 可成功自動部署，首發不報錯
+
+Django 專案能成功 collectstatic 並透過 Whitenoise 提供靜態檔
+
+README 有完整部署步驟（Render 與 Railway）、本地啟動、環境變數說明
