@@ -1,0 +1,332 @@
+/**
+ * 麻煮MINI石頭火鍋 - 地圖元件樣式
+ * MapSection Component Styles
+ * 
+ * @author 麻煮開發團隊
+ * @version 1.0.0
+ */
+
+/* 地圖容器基本樣式 */
+.map-section {
+  width: 100%;
+  height: 500px; /* 從 400px 增加到 500px，讓外框更大 */
+  border-radius: 12px;
+  overflow: visible; /* 改為 visible，避免地圖被切到 */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: #f8f9fa;
+  position: relative;
+}
+
+/* Google Maps 地圖樣式 */
+.map-section .map-google {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* 靜態地圖降級方案樣式 */
+.map-static-fallback {
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.map-static-content {
+  max-width: 100%;
+  width: 100%;
+}
+
+.map-static-header h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.map-static-address {
+  margin: 0 0 20px 0;
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+.map-static-image {
+  margin: 0 0 20px 0;
+  position: relative;
+}
+
+.map-static-image img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.map-static-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 2px dashed #dee2e6;
+}
+
+.map-placeholder-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+
+.map-static-placeholder p {
+  margin: 0;
+  color: #6c757d;
+  font-size: 1rem;
+}
+
+/* 地圖操作按鈕樣式 */
+.map-static-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.map-open-google-btn,
+.map-directions-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.map-open-google-btn {
+  background: #4285f4;
+  color: #ffffff;
+}
+
+.map-open-google-btn:hover {
+  background: #3367d6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+}
+
+.map-directions-btn {
+  background: #34a853;
+  color: #ffffff;
+}
+
+.map-directions-btn:hover {
+  background: #2d8e47;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(52, 168, 83, 0.3);
+}
+
+.map-btn-icon {
+  font-size: 1.2rem;
+}
+
+/* 載入中樣式 */
+.map-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.map-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #4285f4;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.map-loading p {
+  margin: 0;
+  color: #666;
+  font-size: 1rem;
+}
+
+/* 錯誤狀態樣式 */
+.map-fallback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.map-fallback-content {
+  text-align: center;
+  padding: 20px;
+}
+
+.map-fallback-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+
+.map-fallback p {
+  margin: 0 0 20px 0;
+  color: #666;
+  font-size: 1rem;
+}
+
+.map-fallback-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: #4285f4;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.map-fallback-btn:hover {
+  background: #3367d6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .map-section {
+    height: 450px; /* 從 350px 增加到 450px */
+  }
+  
+  .map-static-header h3 {
+    font-size: 1.3rem;
+  }
+  
+  .map-static-address {
+    font-size: 0.9rem;
+  }
+  
+  .map-open-google-btn,
+  .map-directions-btn {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .map-static-actions {
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-section {
+    height: 400px; /* 從 300px 增加到 400px */
+  }
+  
+  .map-static-fallback {
+    padding: 16px;
+  }
+  
+  .map-static-header h3 {
+    font-size: 1.2rem;
+  }
+  
+  .map-static-address {
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+  }
+  
+  .map-static-image {
+    margin-bottom: 16px;
+  }
+  
+  .map-open-google-btn,
+  .map-directions-btn {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+  
+  .map-static-actions {
+    max-width: 220px;
+    gap: 10px;
+  }
+}
+
+/* 深色模式支援 */
+@media (prefers-color-scheme: dark) {
+  .map-static-fallback {
+    background: #2d3748;
+    color: #e2e8f0;
+  }
+  
+  .map-static-header h3 {
+    color: #e2e8f0;
+  }
+  
+  .map-static-address {
+    color: #a0aec0;
+  }
+  
+  .map-static-placeholder {
+    background: #4a5568;
+    border-color: #718096;
+  }
+  
+  .map-static-placeholder p {
+    color: #a0aec0;
+  }
+  
+  .map-loading {
+    background: rgba(45, 55, 72, 0.95);
+  }
+  
+  .map-loading p {
+    color: #a0aec0;
+  }
+  
+  .map-fallback {
+    background: rgba(45, 55, 72, 0.95);
+  }
+  
+  .map-fallback p {
+    color: #a0aec0;
+  }
+}

@@ -1,0 +1,266 @@
+/**
+ * 麻煮MINI石頭火鍋 - 多語切換樣式
+ * Internationalization (i18n) Styles
+ * 
+ * Author: 麻煮開發團隊
+ * Version: 2.1.0
+ */
+
+/* CSS 變數定義 */
+:root {
+  --z-lang-dropdown: 99999; /* 語言下拉選單的 z-index，確保最高層級 */
+}
+
+/* 手機版語言切換下拉選單 z-index 修正 */
+@media (max-width: 768px) {
+  .lang-dropdown {
+    position: relative;
+    z-index: var(--z-lang-dropdown);
+  }
+  
+  .lang-dropdown__menu {
+    z-index: var(--z-lang-dropdown) !important;
+  }
+}
+
+/* 語言下拉選單容器 */
+.lang-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* 語言下拉選單切換按鈕 */
+.lang-dropdown__toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 12px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 60px;
+  justify-content: center;
+}
+
+/* 語言下拉選單切換按鈕懸停效果 */
+.lang-dropdown__toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  /* 移除 transform 以避免創建新的 stacking context */
+}
+
+/* 語言下拉選單切換按鈕點擊效果 */
+.lang-dropdown__toggle:active {
+  /* 移除 transform 以避免創建新的 stacking context */
+}
+
+/* 地球圖標樣式 */
+.lang-dropdown__toggle .header__icon-img {
+  width: 40px; /* 從 32px 增加到 40px */
+  height: 40px; /* 從 32px 增加到 40px */
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  filter: brightness(0.9);
+}
+
+/* 地球圖標懸停效果 */
+.lang-dropdown__toggle:hover .header__icon-img {
+  filter: brightness(1.1);
+  /* 移除 transform 以避免創建新的 stacking context */
+}
+
+/* 當前語言文字樣式 */
+.lang-dropdown__current {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* 語言下拉選單選單 */
+.lang-dropdown__menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 8px 0;
+  min-width: 140px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(20px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 9999 !important; /* 確保最高層級，高於所有其他元素 */
+}
+
+/* 語言下拉選單選單顯示狀態 */
+.lang-dropdown__menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* 語言下拉選單項目 */
+.lang-dropdown__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 16px;
+  background: transparent;
+  border: none;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+/* 語言下拉選單項目懸停效果 */
+.lang-dropdown__item:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #000;
+}
+
+/* 語言下拉選單項目激活狀態 */
+.lang-dropdown__item--active {
+  background: rgba(0, 0, 0, 0.08);
+  color: #000;
+  font-weight: 600;
+}
+
+/* 國旗圖標樣式 */
+.lang-dropdown__flag {
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* 語言文字樣式 */
+.lang-dropdown__text {
+  flex: 1;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .lang-dropdown__toggle {
+    padding: 6px 10px;
+    gap: 6px;
+  }
+  
+  .lang-dropdown__toggle .header__icon-img {
+    width: 28px; /* 平板版地球圖標尺寸 */
+    height: 28px; /* 平板版地球圖標尺寸 */
+  }
+  
+  .lang-dropdown__current {
+    font-size: 12px;
+  }
+  
+  .lang-dropdown__menu {
+    min-width: 120px;
+    right: -10px;
+  }
+  
+  .lang-dropdown__item {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
+/* 手機版響應式設計 */
+@media (max-width: 480px) {
+  .lang-dropdown__toggle {
+    padding: 8px 12px; /* 增加手機版按鈕內邊距 */
+    gap: 8px; /* 增加手機版間距 */
+    min-width: 70px; /* 增加手機版最小寬度 */
+  }
+  
+  .lang-dropdown__toggle .header__icon-img {
+    width: 32px; /* 手機版地球圖標尺寸 - 從 24px 增加到 32px */
+    height: 32px; /* 手機版地球圖標尺寸 - 從 24px 增加到 32px */
+  }
+  
+  .lang-dropdown__current {
+    font-size: 12px; /* 手機版語言文字大小 - 從 11px 增加到 12px */
+    font-weight: 700; /* 手機版加粗字體 */
+  }
+  
+  .lang-dropdown__menu {
+    min-width: 130px; /* 手機版增加選單寬度 */
+    right: -8px; /* 調整手機版位置 */
+  }
+  
+  .lang-dropdown__item {
+    padding: 10px 14px; /* 手機版增加項目內邊距 */
+    font-size: 13px; /* 手機版增加字體大小 */
+    min-height: 44px; /* 手機版觸控友好高度 */
+  }
+}
+
+/* 動畫效果 */
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lang-dropdown__menu.is-open {
+  animation: dropdownFadeIn 0.3s ease-out;
+}
+
+/* 無障礙設計 */
+.lang-dropdown__toggle:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+.lang-dropdown__item:focus {
+  outline: 2px solid rgba(0, 0, 0, 0.3);
+  outline-offset: -2px;
+}
+
+/* 高對比模式支援 */
+@media (prefers-contrast: high) {
+  .lang-dropdown__toggle {
+    border: 2px solid currentColor;
+  }
+  
+  .lang-dropdown__menu {
+    border: 2px solid #000;
+  }
+  
+  .lang-dropdown__item {
+    border-bottom: 1px solid #ccc;
+  }
+}
+
+/* 減少動畫模式支援 */
+@media (prefers-reduced-motion: reduce) {
+  .lang-dropdown__toggle,
+  .lang-dropdown__menu,
+  .lang-dropdown__item {
+    transition: none;
+  }
+  
+  .lang-dropdown__menu.is-open {
+    animation: none;
+  }
+}
+
+
+
+
+

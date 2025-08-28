@@ -1,0 +1,319 @@
+/* ===== 全域響應式文字系統 ===== */
+
+/* CSS 自訂屬性 - 響應式字體基礎 */
+:root {
+  /* 基礎字體大小比例 */
+  --font-scale-xs: clamp(0.75rem, 2.5vw, 0.875rem);   /* 12px-14px */
+  --font-scale-sm: clamp(0.875rem, 3vw, 1rem);        /* 14px-16px */
+  --font-scale-base: clamp(1rem, 3.5vw, 1.125rem);    /* 16px-18px */
+  --font-scale-md: clamp(1.125rem, 4vw, 1.25rem);     /* 18px-20px */
+  --font-scale-lg: clamp(1.25rem, 4.5vw, 1.5rem);     /* 20px-24px */
+  --font-scale-xl: clamp(1.5rem, 5vw, 2rem);          /* 24px-32px */
+  --font-scale-2xl: clamp(2rem, 6vw, 2.5rem);         /* 32px-40px */
+  --font-scale-3xl: clamp(2.5rem, 7vw, 3rem);         /* 40px-48px */
+  --font-scale-4xl: clamp(3rem, 8vw, 4rem);           /* 48px-64px */
+
+  /* 行高比例 */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.4;
+  --line-height-relaxed: 1.6;
+  --line-height-loose: 1.8;
+
+  /* 字重 */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+}
+
+/* ===== 基礎文字樣式 ===== */
+
+/* 重設基礎字體 */
+html {
+  font-size: 16px; /* 基礎 1rem */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  line-height: var(--line-height-normal);
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-size: var(--font-scale-base);
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-normal);
+  color: #333;
+}
+
+/* ===== 標題文字系統 ===== */
+
+h1, .h1 {
+  font-size: var(--font-scale-4xl);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: clamp(1rem, 3vw, 2rem);
+}
+
+h2, .h2 {
+  font-size: var(--font-scale-3xl);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: clamp(0.75rem, 2.5vw, 1.5rem);
+}
+
+h3, .h3 {
+  font-size: var(--font-scale-2xl);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: clamp(0.5rem, 2vw, 1rem);
+}
+
+h4, .h4 {
+  font-size: var(--font-scale-xl);
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: clamp(0.5rem, 1.5vw, 0.75rem);
+}
+
+h5, .h5 {
+  font-size: var(--font-scale-lg);
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: clamp(0.25rem, 1vw, 0.5rem);
+}
+
+h6, .h6 {
+  font-size: var(--font-scale-md);
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: clamp(0.25rem, 1vw, 0.5rem);
+}
+
+/* ===== 段落與內文 ===== */
+
+p, .text-body {
+  font-size: var(--font-scale-base);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+.text-lead {
+  font-size: var(--font-scale-lg);
+  line-height: var(--line-height-relaxed);
+  font-weight: var(--font-weight-medium);
+}
+
+.text-small {
+  font-size: var(--font-scale-sm);
+  line-height: var(--line-height-normal);
+}
+
+.text-xs {
+  font-size: var(--font-scale-xs);
+  line-height: var(--line-height-normal);
+}
+
+/* ===== 按鈕文字 ===== */
+
+button, .btn {
+  font-size: var(--font-scale-base);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+}
+
+.btn-sm {
+  font-size: var(--font-scale-sm);
+}
+
+.btn-lg {
+  font-size: var(--font-scale-lg);
+}
+
+/* ===== 導覽列文字 ===== */
+
+nav, .nav {
+  font-size: var(--font-scale-base);
+  font-weight: var(--font-weight-medium);
+}
+
+.nav-sm {
+  font-size: var(--font-scale-sm);
+}
+
+.nav-lg {
+  font-size: var(--font-scale-lg);
+}
+
+/* ===== 表單文字 ===== */
+
+input, textarea, select {
+  font-size: var(--font-scale-base);
+  line-height: var(--line-height-normal);
+}
+
+label {
+  font-size: var(--font-scale-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.form-help {
+  font-size: var(--font-scale-xs);
+  line-height: var(--line-height-normal);
+}
+
+/* ===== 特殊文字樣式 ===== */
+
+.text-hero {
+  font-size: var(--font-scale-4xl);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-bold);
+}
+
+.text-display {
+  font-size: var(--font-scale-3xl);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-bold);
+}
+
+.text-caption {
+  font-size: var(--font-scale-xs);
+  line-height: var(--line-height-normal);
+  color: #6c757d;
+}
+
+/* ===== 響應式斷點優化 ===== */
+
+/* 超小螢幕優化 (≤375px) */
+@media (max-width: 375px) {
+  :root {
+    --font-scale-4xl: clamp(2rem, 8vw, 2.5rem);   /* 減小超大標題 */
+    --font-scale-3xl: clamp(1.75rem, 7vw, 2rem);  /* 減小大標題 */
+  }
+}
+
+/* 小螢幕優化 (376px-575px) */
+@media (min-width: 376px) and (max-width: 575px) {
+  :root {
+    --font-scale-4xl: clamp(2.25rem, 7.5vw, 3rem);
+    --font-scale-3xl: clamp(2rem, 6.5vw, 2.5rem);
+  }
+}
+
+/* 平板優化 (576px-991px) */
+@media (min-width: 576px) and (max-width: 991px) {
+  :root {
+    --font-scale-4xl: clamp(2.5rem, 6vw, 3.5rem);
+    --font-scale-3xl: clamp(2.25rem, 5.5vw, 3rem);
+    --font-scale-2xl: clamp(1.75rem, 4.5vw, 2.25rem);
+  }
+}
+
+/* 桌機優化 (≥992px) */
+@media (min-width: 992px) {
+  :root {
+    --font-scale-4xl: clamp(3rem, 4vw, 4rem);
+    --font-scale-3xl: clamp(2.5rem, 3.5vw, 3rem);
+    --font-scale-2xl: clamp(2rem, 3vw, 2.5rem);
+    --font-scale-xl: clamp(1.5rem, 2.5vw, 2rem);
+  }
+}
+
+/* 超大螢幕優化 (≥1200px) */
+@media (min-width: 1200px) {
+  :root {
+    /* 大螢幕時限制最大字體大小 */
+    --font-scale-4xl: clamp(3.5rem, 3vw, 4rem);
+    --font-scale-3xl: clamp(2.75rem, 2.5vw, 3rem);
+    --font-scale-2xl: clamp(2.25rem, 2vw, 2.5rem);
+  }
+}
+
+/* ===== 動畫優化 ===== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ===== 高對比模式 ===== */
+@media (prefers-contrast: high) {
+  body {
+    color: #000;
+  }
+  
+  .text-caption {
+    color: #333;
+  }
+}
+
+/* ===== 輔助工具類別 ===== */
+
+/* 字重工具 */
+.fw-normal { font-weight: var(--font-weight-normal); }
+.fw-medium { font-weight: var(--font-weight-medium); }
+.fw-semibold { font-weight: var(--font-weight-semibold); }
+.fw-bold { font-weight: var(--font-weight-bold); }
+
+/* 行高工具 */
+.lh-tight { line-height: var(--line-height-tight); }
+.lh-normal { line-height: var(--line-height-normal); }
+.lh-relaxed { line-height: var(--line-height-relaxed); }
+.lh-loose { line-height: var(--line-height-loose); }
+
+/* 文字對齊 */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+/* 響應式文字對齊 */
+@media (max-width: 575px) {
+  .text-sm-center { text-align: center; }
+  .text-sm-left { text-align: left; }
+}
+
+@media (min-width: 576px) {
+  .text-md-center { text-align: center; }
+  .text-md-left { text-align: left; }
+}
+
+@media (min-width: 992px) {
+  .text-lg-center { text-align: center; }
+  .text-lg-left { text-align: left; }
+}
+
+/* 文字截斷 */
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-break {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* ===== 無障礙優化 ===== */
+
+/* 確保焦點可見 */
+*:focus-visible {
+  outline: 2px solid #45818E;
+  outline-offset: 2px;
+}
+
+/* 跳過連結 */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #45818E;
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  font-size: var(--font-scale-sm);
+  z-index: 9999;
+}
+
+.skip-link:focus {
+  top: 6px;
+}

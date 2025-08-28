@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="麻煮迷你石頭鍋 - 完整菜單">
+  <meta name="google-site-verification" content="qo9bYhV0lEi6k5a0TkTNH8Ogq6YgzqhN_m31TvpAGFw" />
+  <title>菜單資訊｜麻煮迷你石頭鍋</title>
+  <link rel="stylesheet" href="static/css/responsive-typography.css">
+  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="stylesheet" href="static/css/i18n.css">
+  <link rel="stylesheet" href="static/css/subnav.css">
+  <link rel="stylesheet" href="static/css/viewport-anim.css">
+</head>
+<body>
+<header class="header" id="header">
+  <!-- 三欄佈局：左 LOGO，中 導覽，右 語言切換 -->
+  
+  <!-- 左欄：LOGO -->
+  <div class="header__left">
+    <div class="header__logo">
+      <a href="home.html" class="header__logo-link">
+        <picture class="header__logo-picture">
+          <!-- 手機版：使用簡化版 logo -->
+          <source media="(max-width: 575px)" 
+                  srcset="static/img/logo/MAZU.webp 1x, static/img/logo/MAZU.webp 2x">
+          <!-- 平板和桌機版：使用完整版 logo -->
+          <source media="(min-width: 576px)" 
+                  srcset="static/img/logo/MAZU.webp 1x, static/img/logo/MAZU.webp 2x">
+          <!-- 備用圖片 -->
+          <img src="static/img/logo/MAZU.webp"
+               alt="麻煮logo" class="header__logo-img" loading="lazy">
+        </picture>
+      </a>
+    </div>
+  </div>
+
+  <!-- 三狀態響應式導覽 -->
+  <!-- 桌機版導覽 (≥1280px) -->
+  <nav class="nav--desktop" aria-label="主要導覽">
+    <ul class="header__nav-list">
+      <li class="header__nav-item"><a href="about.html" class="header__nav-link" data-i18n="nav.about">關於麻煮</a></li>
+      <li class="header__nav-item"><a href="menu.html" class="header__nav-link is-active" data-i18n="nav.menu">菜單資訊</a></li>
+      <li class="header__nav-item"><a href="news.html" class="header__nav-link" data-i18n="nav.news">麻煮快訊</a></li>
+      <li class="header__nav-item"><a href="love.html" class="header__nav-link" data-i18n="nav.love">愛心公益</a></li>
+    </ul>
+  </nav>
+  
+  <!-- 平板版導覽 (768px-1279px) -->
+  <nav class="nav--tablet" aria-label="主要導覽">
+    <ul class="header__nav-list">
+      <li class="header__nav-item"><a href="about.html" class="header__nav-link" data-i18n="nav.about">關於麻煮</a></li>
+      <li class="header__nav-item"><a href="menu.html" class="header__nav-link is-active" data-i18n="nav.menu">菜單資訊</a></li>
+      <li class="header__nav-item"><a href="news.html" class="header__nav-link" data-i18n="nav.news">麻煮快訊</a></li>
+      <li class="header__nav-item"><a href="love.html" class="header__nav-link" data-i18n="nav.love">愛心公益</a></li>
+    </ul>
+  </nav>
+
+  <!-- 右欄：漢堡選單 + 語言切換 -->
+  <div class="header__right">
+    <!-- 漢堡選單 (手機版顯示) -->
+    <button class="header__hamburger" id="hamburger" aria-label="開啟選單"
+            aria-controls="mobile-drawer" aria-expanded="false" data-i18n-attr="aria-label:common.hamburger">
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+    </button>
+
+    <!-- 語言切換 -->
+    <div class="header__language">
+      <div class="lang-dropdown" role="group" aria-label="語言切換">
+        <button class="lang-dropdown__toggle" aria-haspopup="true" aria-expanded="false">
+          <img src="static/img/logo/world.jpg" alt="世界圖標" class="header__icon-img" loading="lazy">
+          <span class="lang-dropdown__current">中</span>
+        </button>
+      <ul class="lang-dropdown__menu" role="menu">
+        <li role="none">
+          <button class="lang-dropdown__item lang-dropdown__item--active" role="menuitem" lang="zh-Hant" data-lang="zh">
+            <span class="lang-dropdown__flag">🇹🇼</span>
+            <span class="lang-dropdown__text">中文</span>
+          </button>
+        </li>
+        <li role="none">
+          <button class="lang-dropdown__item" role="menuitem" lang="en" data-lang="en">
+            <span class="lang-dropdown__flag">🇺🇸</span>
+            <span class="lang-dropdown__text">English</span>
+          </button>
+        </li>
+      </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 手機版抽屜導覽 -->
+<nav class="nav--mobile" id="mobile-drawer" aria-hidden="true" aria-label="手機版主要導覽">
+  <!-- 1. 標頭區域 -->
+  <div class="drawer-header">
+    <div class="drawer-brand">
+      <a href="home.html" class="drawer-logo" aria-label="回到首頁">
+        <picture>
+          <source srcset="static/img/logo/MAZU.webp" type="image/webp">
+          <img src="static/img/logo/MAZU.webp" alt="麻煮MINI石頭火鍋" class="drawer-logo-img">
+        </picture>
+      </a>
+    </div>
+    <button class="drawer-close" id="drawer-close" aria-label="關閉選單" 
+            aria-controls="mobile-drawer" data-i18n-attr="aria-label:common.closeMenu">
+      ✕
+    </button>
+  </div>
+
+  <!-- 2. 主選單 -->
+  <ul class="header__nav-list">
+    <li class="header__nav-item"><a href="about.html" class="header__nav-link" data-i18n="nav.about">關於麻煮</a></li>
+    <li class="header__nav-item"><a href="menu.html" class="header__nav-link is-active" data-i18n="nav.menu">菜單資訊</a></li>
+    <li class="header__nav-item"><a href="news.html" class="header__nav-link" data-i18n="nav.news">麻煮快訊</a></li>
+    <li class="header__nav-item"><a href="love.html" class="header__nav-link" data-i18n="nav.love">愛心公益</a></li>
+  </ul>
+
+  <!-- 3. 底部區域 -->
+  <div class="drawer-footer">
+    <!-- 語言切換列 -->
+    <div class="drawer-controls">
+      <div class="drawer-language">
+        <span class="language-icon">🌐</span>
+        <button class="lang-option active" data-lang="zh" lang="zh">中</button>
+        <span class="lang-separator">|</span>
+        <button class="lang-option" data-lang="en" lang="en">EN</button>
+      </div>
+    </div>
+
+    <!-- 社群列 -->
+    <div class="drawer-social">
+      <a href="https://www.facebook.com/mazustonehotpot" target="_blank" rel="noopener noreferrer" class="social-link">
+        <span class="social-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#1877F2">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </span>
+        <span>麻煮FB粉絲專頁</span>
+      </a>
+
+      <a href="https://www.google.com/maps/place/%E9%BA%BB%E7%85%AE%E8%BF%B7%E4%BD%A0%E7%9F%B3%E9%A0%AD%E9%8D%8B+-+%E5%85%AC%E9%A4%A8%E5%BA%97/@25.0124864,121.5329133,17z/data=!3m1!4b1!4m6!3m5!1s0x3442a984ad026c2b:0x13c6677a196768d7!8m2!3d25.0124864!4d121.5354882!16s%2Fg%2F11qs93qvks?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="social-link">
+        <span class="social-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2C15.87 2 19 5.13 19 9C19 14.25 12 22 12 22S5 14.25 5 9C5 5.13 8.13 2 12 2Z" fill="#EA4335"/>
+            <circle cx="12" cy="9" r="2.5" fill="#FFFFFF"/>
+          </svg>
+        </span>
+        <span>100台北市中正區汀州路三段273號</span>
+      </a>
+    </div>
+
+                    <!-- 版權 -->
+                <div class="drawer-copyright">
+                  © Powered and secured by MISS-TEPPAN
+                </div>
+  </div>
+</nav>
+
+<!-- 背景遮罩 -->
+<div class="backdrop" id="backdrop" aria-hidden="true"></div>
+
+<main class="main">
+  <!-- Hero 區（背景圖改由 CSS 設定）-->
+  <section class="hero menu-hero">
+    <div class="menu__banner"></div>
+    <div class="menu-hero__description">
+      <h1 class="menu-hero__title" data-i18n="menu.hero.title">多元湯底 個人鍋物</h1>
+      <p class="menu-hero__subtitle" data-i18n="menu.hero.subtitle">獨門湯底，為您帶來美味的舌尖體驗。</p>
+      <div class="menu-hero__cta">
+        <a href="#combo-packages" class="menu-hero__cta-btn" data-section="combo-packages" data-i18n="menu.hero.cta">立即看菜單</a>
+      </div>
+    </div>
+    <!-- 次導覽列觸發點哨兵 -->
+    <div class="subnav-trigger" id="menu-subnav-trigger"></div>
+  </section>
+
+  <!-- 統一次導覽列元件 -->
+  <section class="subnav">
+    <ul class="subnav__list">
+      <li class="subnav__item">
+        <a href="#combo-packages" class="subnav__link" data-i18n="menu.nav.combo">組合套餐</a>
+      </li>
+      <li class="subnav__item">
+        <a href="#small-pots" class="subnav__link" data-i18n="menu.nav.small">小鍋系列</a>
+      </li>
+      <li class="subnav__item">
+        <a href="#mini-series" class="subnav__link" data-i18n="menu.nav.mini">Mini麻辣燙</a>
+      </li>
+      <li class="subnav__item">
+        <a href="#mz-exclusive" class="subnav__link" data-i18n="menu.nav.exclusive">麻煮限定</a>
+      </li>
+    </ul>
+  </section>
+
+  <!-- SPA 內容容器 -->
+  <div class="menu-content" id="menu-content">
+    <!-- 內容將由 JavaScript 動態載入 -->
+  </div>
+</main>
+
+<!-- 回到頂部按鈕 -->
+<button class="back-to-top" id="back-to-top" title="回到頂部" data-i18n-attr="title:common.backToTop">↑</button>
+
+<footer class="footer">
+  <p class="footer__text">© Powered and secured by MISS-TEPPAN</p>
+</footer>
+
+  <!-- 多語切換系統 -->
+  <script src="static/js/i18n.js"></script>
+  
+  <!-- JavaScript -->
+  <script src="static/js/script.js"></script>
+  <script src="static/js/subnav.js"></script>
+</body>
+</html>

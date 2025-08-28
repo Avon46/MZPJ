@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="麻煮迷你石頭鍋">
+  <meta name="google-site-verification" content="qo9bYhV0lEi6k5a0TkTNH8Ogq6YgzqhN_m31TvpAGFw" />
+  <title>愛心公益｜麻煮迷你石頭鍋</title>
+  <link rel="stylesheet" href="static/css/responsive-typography.css">
+  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="stylesheet" href="static/css/i18n.css">
+  <link rel="stylesheet" href="static/css/subnav.css">
+  <link rel="stylesheet" href="static/css/viewport-anim.css">
+</head>
+<body>
+<header class="header" id="header">
+  <!-- 三欄佈局：左 LOGO，中 導覽，右 語言切換 -->
+  
+  <!-- 左欄：LOGO -->
+  <div class="header__left">
+    <div class="header__logo">
+      <a href="home.html" class="header__logo-link">
+        <picture class="header__logo-picture">
+          <!-- 手機版：使用簡化版 logo -->
+          <source media="(max-width: 575px)" 
+                  srcset="static/img/logo/MAZU.webp 1x, static/img/logo/MAZU.webp 2x">
+          <!-- 平板和桌機版：使用完整版 logo -->
+          <source media="(min-width: 576px)" 
+                  srcset="static/img/logo/MAZU.webp 1x, static/img/logo/MAZU.webp 2x">
+          <!-- 備用圖片 -->
+          <img src="static/img/logo/MAZU.webp"
+               alt="麻煮logo" class="header__logo-img" loading="lazy">
+        </picture>
+      </a>
+    </div>
+  </div>
+
+  <!-- 三狀態響應式導覽 -->
+  <!-- 桌機版導覽 (≥1280px) -->
+  <nav class="nav--desktop" aria-label="主要導覽">
+    <ul class="header__nav-list">
+      <li class="header__nav-item"><a href="about.html" class="header__nav-link" data-i18n="nav.about">關於麻煮</a></li>
+      <li class="header__nav-item"><a href="menu.html" class="header__nav-link" data-i18n="nav.menu">菜單資訊</a></li>
+      <li class="header__nav-item"><a href="news.html" class="header__nav-link" data-i18n="nav.news">麻煮快訊</a></li>
+      <li class="header__nav-item"><a href="love.html" class="header__nav-link is-active" data-i18n="nav.love">愛心公益</a></li>
+    </ul>
+  </nav>
+  
+  <!-- 平板版導覽 (768px-1279px) -->
+  <nav class="nav--tablet" aria-label="主要導覽">
+    <ul class="header__nav-list">
+      <li class="header__nav-item"><a href="about.html" class="header__nav-link" data-i18n="nav.about">關於麻煮</a></li>
+      <li class="header__nav-item"><a href="menu.html" class="header__nav-link" data-i18n="nav.menu">菜單資訊</a></li>
+      <li class="header__nav-item"><a href="news.html" class="header__nav-link" data-i18n="nav.news">麻煮快訊</a></li>
+      <li class="header__nav-item"><a href="love.html" class="header__nav-link is-active" data-i18n="nav.love">愛心公益</a></li>
+    </ul>
+  </nav>
+
+  <!-- 右欄：漢堡選單 + 語言切換 -->
+  <div class="header__right">
+    <!-- 漢堡選單 (手機版顯示) -->
+    <button class="header__hamburger" id="hamburger" aria-label="開啟選單"
+            aria-controls="mobile-drawer" aria-expanded="false" data-i18n-attr="aria-label:common.hamburger">
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+    </button>
+
+    <!-- 語言切換 -->
+    <div class="header__language">
+      <div class="lang-dropdown" role="group" aria-label="語言切換">
+        <button class="lang-dropdown__toggle" aria-haspopup="true" aria-expanded="false">
+          <img src="static/img/logo/world.jpg" alt="世界圖標" class="header__icon-img" loading="lazy">
+          <span class="lang-dropdown__current">中</span>
+        </button>
+      <ul class="lang-dropdown__menu" role="menu">
+        <li role="none">
+          <button class="lang-dropdown__item lang-dropdown__item--active" role="menuitem" lang="zh-Hant" data-lang="zh">
+            <span class="lang-dropdown__flag">🇹🇼</span>
+            <span class="lang-dropdown__text">中文</span>
+          </button>
+        </li>
+        <li role="none">
+          <button class="lang-dropdown__item" role="menuitem" lang="en" data-lang="en">
+            <span class="lang-dropdown__flag">🇺🇸</span>
+            <span class="lang-dropdown__text">English</span>
+          </button>
+        </li>
+      </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 手機版抽屜導覽 -->
+<nav class="nav--mobile" id="mobile-drawer" aria-hidden="true" aria-label="手機版主要導覽">
+  <!-- 1. 標頭區域 -->
+  <div class="drawer-header">
+    <div class="drawer-brand">
+      <a href="home.html" class="drawer-logo" aria-label="回到首頁">
+        <picture>
+          <source srcset="static/img/logo/MAZU.webp" type="image/webp">
+          <img src="static/img/logo/MAZU.webp" alt="麻煮MINI石頭火鍋" class="drawer-logo-img">
+        </picture>
+      </a>
+    </div>
+    <button class="drawer-close" id="drawer-close" aria-label="關閉選單" 
+            aria-controls="mobile-drawer" data-i18n-attr="aria-label:common.closeMenu">
+      ✕
+    </button>
+  </div>
+
+  <!-- 2. 主選單 -->
+  <ul class="header__nav-list">
+    <li class="header__nav-item"><a href="about.html" class="header__nav-link" data-i18n="nav.about">關於麻煮</a></li>
+    <li class="header__nav-item"><a href="menu.html" class="header__nav-link" data-i18n="nav.menu">菜單資訊</a></li>
+    <li class="header__nav-item"><a href="news.html" class="header__nav-link" data-i18n="nav.news">麻煮快訊</a></li>
+    <li class="header__nav-item"><a href="love.html" class="header__nav-link is-active" data-i18n="nav.love">愛心公益</a></li>
+  </ul>
+
+  <!-- 3. 底部區域 -->
+  <div class="drawer-footer">
+    <!-- 語言切換列 -->
+    <div class="drawer-controls">
+      <div class="drawer-language">
+        <span class="language-icon">🌐</span>
+        <button class="lang-option active" data-lang="zh" lang="zh">中</button>
+        <span class="lang-separator">|</span>
+        <button class="lang-option" data-lang="en" lang="en">EN</button>
+      </div>
+    </div>
+
+    <!-- 社群列 -->
+    <div class="drawer-social">
+      <a href="https://www.facebook.com/mazustonehotpot" target="_blank" rel="noopener noreferrer" class="social-link">
+        <span class="social-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#1877F2">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </span>
+        <span>麻煮FB粉絲專頁</span>
+      </a>
+
+      <a href="https://www.google.com/maps/place/%E9%BA%BB%E7%85%AE%E8%BF%B7%E4%BD%A0%E7%9F%B3%E9%A0%AD%E9%8D%8B+-+%E5%85%AC%E9%A4%A8%E5%BA%97/@25.0124864,121.5329133,17z/data=!3m1!4b1!4m6!3m5!1s0x3442a984ad026c2b:0x13c6677a196768d7!8m2!3d25.0124864!4d121.5354882!16s%2Fg%2F11qs93qvks?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="social-link">
+        <span class="social-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2C15.87 2 19 5.13 19 9C19 14.25 12 22 12 22S5 14.25 5 9C5 5.13 8.13 2 12 2Z" fill="#EA4335"/>
+            <circle cx="12" cy="9" r="2.5" fill="#FFFFFF"/>
+          </svg>
+        </span>
+        <span>100台北市中正區汀州路三段273號</span>
+      </a>
+    </div>
+
+                    <!-- 版權 -->
+                <div class="drawer-copyright">
+                  © Powered and secured by MISS-TEPPAN
+                </div>
+  </div>
+</nav>
+
+<!-- 背景遮罩 -->
+<div class="backdrop" id="backdrop" aria-hidden="true"></div>
+
+<main class="main">
+  <!-- 首屏（Hero） -->
+  <section id="hero" class="hero love-hero">
+    <div class="love__banner"></div> <!-- 背景圖請在 CSS 設定，見下方備註 -->
+    <div class="love-hero__desc">
+      <h1 class="love-hero__title" data-i18n="love.hero.title1">讓善意成為日常</h1>
+      <h1 class="love-hero__title" data-i18n="love.hero.title2">用一碗熱食溫暖更多人</h1>
+      <a href="#programs" class="love-cta" data-i18n="love.hero.cta">查看所有公益方案</a>
+    </div>
+    <!-- 次導覽列觸發點哨兵 -->
+    <div class="subnav-trigger" id="love-subnav-trigger"></div>
+  </section>
+
+  <!-- 統一次導覽列元件 -->
+  <section class="subnav">
+    <ul class="subnav__list">
+      <li class="subnav__item">
+        <a href="#programs" class="subnav__link" data-i18n="love.nav.programs">公益方案</a>
+      </li>
+      <li class="subnav__item">
+        <a href="#guidelines" class="subnav__link" data-i18n="love.nav.guidelines">使用須知</a>
+      </li>
+      <li class="subnav__item">
+        <a href="#milestones" class="subnav__link" data-i18n="love.nav.milestones">成效里程碑</a>
+      </li>
+      <li class="subnav__item">
+        <a href="#faq" class="subnav__link" data-i18n="love.nav.faq">Q&A</a>
+      </li>
+    </ul>
+  </section>
+      <!-- 我們的初衷 -->
+      <section id="origin" class="love-section love-origin">
+    <div class="love-section__container">
+      <h2 class="love-section__title" data-i18n="love.origin.title">我們的初衷</h2>
+      <p class="love-section__text" data-i18n="love.origin.text">靈感源自台灣海神信仰「媽祖」的護佑精神，我們以餐飲為媒介，長期關注偏鄉與弱勢需求，透過可被複製的餐飲公益方案，連結社會資源，讓溫暖持續循環。</p>
+    </div>
+  </section>
+
+  <!-- 公益方案（卡片） -->
+  <section id="programs" class="love-section love-programs">
+    <div class="love-section__container">
+      <h2 class="love-section__title" data-i18n="love.programs.title">優惠活動</h2>
+      <div class="love-programs__grid">
+        <article class="love-card">
+          <h3 class="love-card__title" data-i18n="love.programs.cards.visually_impaired.title">視障聽障人士</h3>
+          <p class="love-card__text" data-i18n="love.programs.cards.visually_impaired.text">憑身心障礙正本證明，本人及陪同的一位親友來店同桌並消費任一鍋物，麻煮再款待你任一口味MINI鍋。(櫻桃鴨肉、雪花牛肉、小羔羊肉、梅花豬肉 四選一)</p>
+        </article>
+        <article class="love-card">
+          <h3 class="love-card__title" data-i18n="love.programs.cards.medical_staff.title">醫護人員</h3>
+          <p class="love-card__text" data-i18n="love.programs.cards.medical_staff.text">憑醫護人員證照正本證明，本人及陪同的一位親友來店同桌並消費，可享任選鍋物第二鍋半價。(優惠以價低者計)</p>
+        </article>
+        <article class="love-card">
+          <h3 class="love-card__title" data-i18n="love.programs.cards.filial_piety.title">孝順雙親</h3>
+          <p class="love-card__text" data-i18n="love.programs.cards.filial_piety.text">家庭用餐與父母親一同前來，由成年子女買單，並由服務人員為您拍照，且同意於麻煮MINI麻辣煲粉絲專頁露出，即贈鮮蝦一份。(單次消費限兌換乙份)</p>
+        </article>
+        <article class="love-card">
+          <h3 class="love-card__title" data-i18n="love.programs.cards.matsu_resident.title">馬祖居民</h3>
+          <p class="love-card__text" data-i18n="love.programs.cards.matsu_resident.text">憑馬祖地區身分證/漁民證正本證明，來店消費任一鍋物，即贈蛤蠣一份。(單次消費限兌換乙份)</p>
+        </article>
+        <article class="love-card">
+          <h3 class="love-card__title" data-i18n="love.programs.cards.new_resident.title">新住民</h3>
+          <p class="love-card__text" data-i18n="love.programs.cards.new_resident.text">新住民憑合法台灣居留證件正本，來店消費任一餐點，可享加點脆皮臭豆腐只要19元。(單次消費限加點優惠乙次)</p>
+        </article>
+        <article class="love-card">
+          <h3 class="love-card__title" data-i18n="love.programs.cards.beach_cleanup.title">山海守護行動</h3>
+          <p class="love-card__text" data-i18n="love.programs.cards.beach_cleanup.text">憑當年度淨灘活動/手作步道證明，本人來店消費任一鍋物並打卡，即贈安格斯牛肉乙份。(單次消費限兌換乙次)</p>
+        </article>
+        <article class="love-card">
+          <h3 class="love-card__title" data-i18n="love.programs.cards.allpass.title">學生ALLPASS</h3>
+          <p class="love-card__text" data-i18n="love.programs.cards.allpass.text">研究所及大專在學生，憑上學期ALLPASS成績單證明，本人來店消費並打卡，即贈炸雞翅乙隻。(每學期僅能兌換乙次)</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 使用須知 -->
+  <section id="guidelines" class="love-section love-guidelines">
+    <div class="love-section__container">
+      <h2 class="love-section__title" data-i18n="love.guidelines.title">注意事項</h2>
+      <ul class="love-guidelines__list">
+        <li data-i18n="love.guidelines.items.0">本優惠僅限內用，外帶及外送不適用。</li>
+        <li data-i18n="love.guidelines.items.1">以上優惠擇一適用，不得與其他優惠合併使用。</li>
+        <li data-i18n="love.guidelines.items.2">本公司保有變更活動項目之權利。</li>
+        <li data-i18n="love.guidelines.items.3">實際提供品項以門市現場為準，恕不另行更換或折抵現金。</li>
+      </ul>
+      <p class="love-section__note" data-i18n="love.guidelines.note">適用門市：將持續更新於本頁公告。</p>
+    </div>
+  </section>
+
+  <!-- 成效里程碑 -->
+  <section id="milestones" class="love-section love-milestones">
+    <div class="love-section__container">
+      <h2 class="love-section__title" data-i18n="love.milestones.title"><strong>成效里程碑</strong></h2>
+      <h3 class='love-section__text' data-i18n="love.milestones.subtitle1"><strong>自 2021 年起自當月已累計總優惠金額</strong></h3>
+      <div class="love-milestone viewport-counter">
+        <div class="love-milestone__number counter-number" data-target="714649">714,649+</div>
+        <div class="love-milestone__label" data-i18n="love.milestones.total">目前總累積</div>
+      </div>
+      <h3 class='love-section__text' data-i18n="love.milestones.subtitle2"><strong>已累計社會回饋各項優惠金額</strong></h3>
+      <div class="love-milestones__grid">
+        <div class="love-milestone viewport-card delay-1">
+          <div class="love-milestone__number counter-number" data-target="488540">488,540+</div>
+          <div class="love-milestone__label" data-i18n="love.milestones.labels.visually_impaired">視障/聽障人士</div>
+        </div>
+        <div class="love-milestone viewport-card delay-2">
+          <div class="love-milestone__number counter-number" data-target="133468">133,468+</div>
+          <div class="love-milestone__label" data-i18n="love.milestones.labels.medical_staff">醫護人員證照</div>
+        </div>
+        <div class="love-milestone viewport-card delay-3">
+          <div class="love-milestone__number counter-number" data-target="3155">3,155</div>
+          <div class="love-milestone__label" data-i18n="love.milestones.labels.filial_piety">孝順雙親</div>
+        </div>
+        <div class="love-milestone viewport-card delay-4">
+          <div class="love-milestone__number counter-number" data-target="1160">1,160+</div>
+          <div class="love-milestone__label" data-i18n="love.milestones.labels.matsu_resident">馬祖身分/漁民證</div>
+        </div>
+        <div class="love-milestone viewport-card delay-5">
+          <div class="love-milestone__number counter-number" data-target="1674">1,674+</div>
+          <div class="love-milestone__label" data-i18n="love.milestones.labels.new_resident">新住民</div>
+        </div>
+        <div class="love-milestone viewport-card delay-6">
+          <div class="love-milestone__number counter-number" data-target="3780">3,780+</div>
+          <div class="love-milestone__label" data-i18n="love.milestones.labels.beach_cleanup">淨灘/手作步道</div>
+        </div>
+        <div class="love-milestone viewport-card delay-6">
+          <div class="love-milestone__number counter-number" data-target="78807">78,807+</div>
+          <div class="love-milestone__label" data-i18n="love.milestones.labels.allpass">ALLPASS</div>
+        </div>
+      </div>
+      
+      <!-- 最後更新時間 -->
+      <div class="love-last-updated"></div>
+    </div>
+  </section>
+
+  <!-- 常見問答（FAQ） -->
+  <section id="faq" class="love-section love-faq">
+    <div class="love-section__container">
+      <h2 class="love-section__title" data-i18n="love.faq.title"><strong>Q&A</strong></h2>
+      <h3 class='love-section__text' data-i18n="love.faq.subtitle"><strong>你想問的這裡都有</strong></h3>
+      <div class="love-faq__list">
+        <details class="love-faq__item">
+          <summary class="love-faq__q" data-i18n="love.faq.items.0.q">要怎麼使用公益優惠？</summary>
+          <div class="love-faq__a" data-i18n="love.faq.items.0.a">請於點餐前主動出示證件、截圖或活動券。餐後恕不補登。</div>
+        </details>
+        <details class="love-faq__item">
+          <summary class="love-faq__q" data-i18n="love.faq.items.1.q">我可以同時用兩種優惠嗎？</summary>
+          <div class="love-faq__a" data-i18n="love.faq.items.1.a">除非活動另有註明，優惠不得併用。</div>
+        </details>
+        <details class="love-faq__item">
+          <summary class="love-faq__q" data-i18n="love.faq.items.2.q">外送平台或外帶也能享有嗎？</summary>
+          <div class="love-faq__a" data-i18n="love.faq.items.2.a">除券面特別標示，公益優惠僅限內用／現場自取。</div>
+        </details>
+        <details class="love-faq__item">
+          <summary class="love-faq__q" data-i18n="love.faq.items.3.q">什麼證明可以使用醫護／新住民／學生優惠？</summary>
+          <div class="love-faq__a" data-i18n="love.faq.items.3.a">醫護需醫事證；新住民需居留證；學生需學生證與成績單；其餘依公告。</div>
+        </details>
+        <details class="love-faq__item">
+          <summary class="love-faq__q" data-i18n="love.faq.items.4.q">這些公益優惠是長期的嗎？</summary>
+          <div class="love-faq__a" data-i18n="love.faq.items.4.a">部分為長期專案，部分為節慶限定；以本頁公告為準。</div>
+        </details>
+      </div>
+          </div>
+    </section>
+  </main>
+
+<!-- 回到頂部按鈕 -->
+<button class="back-to-top" id="back-to-top" title="回到頂部" data-i18n-attr="title:common.backToTop">↑</button>
+
+<footer class="footer">
+  <p class="footer__text">© Powered and secured by MISS-TEPPAN</p>
+</footer>
+
+  <!-- 多語切換系統 -->
+  <script src="static/js/i18n.js"></script>
+  
+  <!-- JavaScript -->
+  <script src="static/js/script.js"></script>
+  <script src="static/js/love-stats.js"></script>
+  <script src="static/js/subnav.js"></script>
+  <script src="static/js/viewport-anim.js"></script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+{
+  "meta": {
+    "title": "Mazu MINI Stone Hot Pot",
+    "description": "Mazu MINI Stone Hot Pot - Offering unique spicy milk hot pot, signature red oil spicy hot pot and other specialty dishes, combining charity and social responsibility",
+    "keywords": "Mazu,MINI Stone Hot Pot,Spicy Hot Pot,Individual Hot Pot,Charity,Taipei Food"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About Mazu",
+    "menu": "Menu",
+    "news": "News",
+    "love": "Charity"
+  },
+  "home": {
+    "hero": {
+      "title": "Sharing with You",
+      "subtitle": "Inspired by Taiwan's Mazu faith, traditional stone hot pot combines diverse spicy flavors, bringing Taiwanese hot and steaming happiness.",
+      "cta": "Learn More About Our Story"
+    },
+    "usp": {
+      "title": "Mazu Features",
+      "item1": {
+        "title": "Individual Stone Pot",
+        "description": "Enjoy delicious flavors alone, one person can also enjoy the fun of stone hot pot"
+      },
+      "item2": {
+        "title": "Ocean Guardian Brand Spirit",
+        "description": "Inheriting Mazu spirit, sharing good deeds and virtues"
+      },
+      "item3": {
+        "title": "Safe Ingredients",
+        "description": "Carefully selected fresh ingredients, ensuring every bite of deliciousness"
+      }
+    },
+    "news": {
+      "title": "Latest News",
+      "cta": "View All News"
+    },
+    "cta": {
+      "title": "Take Action Now",
+      "store": "Find Store",
+      "menu": "Menu"
+    },
+    "company": "MISS TEPPAN Food Group Affiliated Companies"
+  },
+  "about": {
+    "hero": {
+      "title": "Mazu Brand Story",
+      "subtitle": "Inheriting Mazu spirit, protecting marine ecology, bringing you the purest deliciousness",
+      "cta": "Watch Brand Story Now"
+    },
+    "story": {
+      "title": "The Heat of Stone Pot, Carrying Mazu's Protection",
+      "subtitle": "Inspired by Taiwan's Mazu faith, traditional stone hot pot combines diverse spicy flavors, bringing Taiwanese hot and steaming happiness.",
+      "content1": "The name 'Mazu' comes from the sea god faith in Taiwan's coastal areas, which has had a major impact on marine culture and is called Mazu culture.",
+      "content2": "Mazu is regarded as the 'protector of the nation and people' sea guardian, just as we hope to accompany each customer with a bowl of hot and steaming stone hot pot, bringing peace and warmth.",
+      "content3": "Mazu takes 'spicy' as fragrance and 'cooking' as method, inheriting the passion of Taiwanese hot pot. From stone hot pot with fragrant ingredients, classic spicy soup base, to sesame oil, sesame sauce, sesame and other diverse spicy flavors, extending to rich individual hot pot choices. Whether it's dinner for one, small gatherings, or takeout and delivery, Mazu can become an economical and quality daily good taste."
+    },
+    "store": {
+      "title": "Store Information",
+      "subtitle": "Welcome to taste Mazu's deliciousness",
+      "name": "Mazu Taipei Gongguan Store",
+      "address": "Address: No. 273, Sec. 3, Tingzhou Rd., Zhongzheng Dist., Taipei City 100",
+      "phone": "Phone: (02) 2345-6789",
+      "hours": "Business Hours: 11:00–22:00"
+    }
+
+  },
+  "menu": {
+    "hero": {
+      "title": "Diverse Soup Bases, Individual Hot Pots",
+      "subtitle": "Unique soup bases bring you delicious taste experiences.",
+      "cta": "View Menu Now"
+    },
+    "nav": {
+      "combo": "Combo Packages",
+      "small": "Small Pot Series",
+      "mini": "Mini Spicy Hot Pot",
+      "exclusive": "Mazu Exclusive"
+    },
+    "combo": {
+      "title": "Combo Packages",
+      "cards": {
+        "combo1": {
+          "title": "Mazu Combo Meal",
+          "description": "Signature soup base + Premium meat + Fresh vegetables + Special side dishes"
+        },
+        "combo2": {
+          "title": "Couple Combo",
+          "description": "Double portion, perfect for two people to share delicious experience"
+        },
+        "combo3": {
+          "title": "Signature Combo",
+          "description": "Mazu's most popular classic combination, must-try recommendation"
+        },
+        "combo4": {
+          "title": "Romantic Couple Combo",
+          "description": "Romantic couple package, sweet shared moments"
+        },
+        "combo5": {
+          "title": "Ocean & Land Combo",
+          "description": "Seafood + meat double enjoyment, luxurious deliciousness"
+        },
+        "combo6": {
+          "title": "Seafood Combo",
+          "description": "Fresh seafood selection, ocean's fresh taste"
+        },
+        "combo7": {
+          "title": "Vegetarian Combo",
+          "description": "Fresh vegetables + mushrooms, healthy delicious choice"
+        }
+      },
+      "notice": {
+        "title": "Important Notes",
+        "items": [
+          "Menu may vary, subject to on-site availability",
+          "Images for reference only",
+          "Menu content may be adjusted seasonally, please refer to on-site announcements"
+        ]
+      }
+    },
+    "small": {
+      "title": "Small Pot Series",
+      "pots": {
+        "milk": {
+          "title": "Signature Spicy Milk Small Pot",
+          "description": "Rich milk soup base, mild spicy, perfect for first-time try"
+        },
+        "spicy": {
+          "title": "Signature Red Oil Spicy Small Pot",
+          "description": "Classic spicy soup base, fragrant and spicy, first choice for spicy lovers"
+        },
+        "clear": {
+          "title": "Clear Soup Small Pot",
+          "description": "Light soup base, highlighting original ingredient flavors, healthy choice"
+        },
+        "stone": {
+          "title": "Taiwanese Sautéed Stone Hot Pot",
+          "description": "Traditional stone pot with sautéed soup base, aromatic and flavorful"
+        },
+        "cheese": {
+          "title": "Rich Cheese Milk Small Pot",
+          "description": "Rich cheese milk soup base, creamy and smooth texture"
+        },
+        "weekday": {
+          "title": "Weekday Limited Small Pot",
+          "description": "Weekday exclusive special soup base, limited supply"
+        }
+      },
+      "meat_options": {
+        "snowflake_beef": "Snowflake Beef",
+        "lamb_shoulder": "Lamb Shoulder",
+        "pork_collar": "Pork Collar"
+      }
+    },
+    "mini": {
+      "title": "Mini / Spicy Hot Pot",
+      "description": "Small portion, big satisfaction",
+      "items": {
+        "combo": {
+          "title": "Spicy Five More Combo Pot",
+          "description": "Includes: Braised pork rice, sour and spicy noodles, oolong noodles, prince noodles, wide vermicelli, white rice"
+        }
+      }
+    },
+    "exclusive": {
+      "title": "Mazu Exclusive",
+      "description": "Exclusive features, limited supply",
+      "items": {
+        "spicy_mama": "Spicy Braised Three Mama (Large/Small)",
+        "intestine": "Spicy Braised Intestine",
+        "double_monster": "Spicy Braised Double Monster",
+        "duck_blood": "Spicy Braised Tender Duck Blood",
+        "stinky_tofu": "Spicy Braised Stinky Tofu",
+        "black_noodle": "Black Sesame Noodles",
+        "small_noodle": "Mazu Small Noodles",
+        "crispy_tofu": "Crispy Stinky Tofu",
+        "crispy_wings": "Crispy Fried Chicken Wings",
+        "potato_strips": "Sour Potato Strips"
+      }
+    },
+    "title": "Menu Information",
+    "subtitle": "Selected delicacies to satisfy your taste buds"
+  },
+  "news": {
+    "hero": {
+      "title": "Mazu News",
+      "subtitle": "Latest news・Event information・Promotional announcements",
+      "cta": "View Latest News"
+    },
+    "latest": {
+      "title": "Latest News",
+      "hint": "Recent news will be updated here."
+    },
+    "title": "Mazu News",
+    "subtitle": "Latest activities and promotional information"
+  },
+  "love": {
+    "hero": {
+      "title1": "Making Kindness Daily",
+      "title2": "Warming More People with a Bowl of Hot Food",
+      "cta": "View All Charity Programs"
+    },
+    "nav": {
+      "origin": "Our Original Intention",
+      "programs": "Charity Programs",
+      "guidelines": "Usage Guidelines",
+      "milestones": "Achievement Milestones",
+      "faq": "Q&A"
+    },
+    "origin": {
+      "title": "Our Original Intention",
+      "text": "Inspired by Taiwan's sea god faith 'Mazu' protective spirit, we use dining as a medium to long-term focus on rural and disadvantaged needs, connecting social resources through replicable dining charity programs, making warmth continuously circulate."
+    },
+    "programs": {
+      "title": "Promotional Activities",
+      "cards": {
+        "visually_impaired": {
+          "title": "Visually & Hearing Impaired",
+          "text": "With original disability certificate, the person and one accompanying relative dining together and consuming any hot pot, Mazu will treat you to any flavor MINI pot. (Choose one from Cherry Duck, Snowflake Beef, Lamb, Plum Pork)"
+        },
+        "medical_staff": {
+          "title": "Medical Staff",
+          "text": "With original medical staff license certificate, the person and one accompanying relative dining together and consuming, enjoy 50% off second pot of any hot pot. (Discount applies to lower-priced item)"
+        },
+        "filial_piety": {
+          "title": "Filial Piety",
+          "text": "Family dining with parents, paid by adult children, photographed by service staff, and agreeing to appear on Mazu MINI Spicy Pot fan page, receive free shrimp. (Limit one per consumption)"
+        },
+        "matsu_resident": {
+          "title": "Matsu Residents",
+          "text": "With original Matsu area ID/fisherman certificate, consume any hot pot in store, receive free clams. (Limit one per consumption)"
+        },
+        "new_resident": {
+          "title": "New Residents",
+          "text": "New residents with valid Taiwan residence permit, consume any meal in store, enjoy crispy stinky tofu for only NT$19. (Limit one per consumption)"
+        },
+        "beach_cleanup": {
+          "title": "Mountain & Sea Guardian Action",
+          "text": "With current year beach cleanup/handmade trail proof, consume any hot pot in store and check-in, receive free Angus beef. (Limit one per consumption)"
+        },
+        "allpass": {
+          "title": "Student ALLPASS",
+          "text": "Graduate and college students, with last semester ALLPASS transcript, consume in store and check-in, receive free fried chicken wing. (Once per semester)"
+        }
+      }
+    },
+    "guidelines": {
+      "title": "Important Notes",
+      "items": [
+        "These offers are for dine-in only, takeout and delivery not applicable.",
+        "Above offers are mutually exclusive, cannot be combined with other promotions.",
+        "Company reserves the right to modify activity items.",
+        "Actual items provided subject to store availability, no exchanges or cash refunds."
+      ],
+      "note": "Applicable stores: Will be continuously updated on this page."
+    },
+    "milestones": {
+      "title": "Achievement Milestones",
+      "subtitle1": "Total accumulated discount amount since 2021 to current month",
+      "subtitle2": "Accumulated social feedback various discount amounts",
+      "total": "Current Total Accumulation",
+      "labels": {
+        "visually_impaired": "Visually/Hearing Impaired",
+        "medical_staff": "Medical Staff License",
+        "filial_piety": "Filial Piety",
+        "matsu_resident": "Matsu ID/Fisherman Certificate",
+        "new_resident": "New Residents",
+        "beach_cleanup": "Beach Cleanup/Handmade Trail",
+        "allpass": "ALLPASS"
+      }
+    },
+    "faq": {
+      "title": "Q&A",
+      "subtitle": "All your questions answered here",
+      "items": [
+        {
+          "q": "How to use charity offers?",
+          "a": "Please actively present certificates, screenshots or activity vouchers before ordering. Cannot be processed after meal."
+        },
+        {
+          "q": "Can I use two offers simultaneously?",
+          "a": "Unless otherwise noted, offers cannot be combined."
+        },
+        {
+          "q": "Are delivery platforms or takeout eligible?",
+          "a": "Except for special voucher notes, charity offers are dine-in/self-pickup only."
+        },
+        {
+          "q": "What certificates can be used for medical/new resident/student offers?",
+          "a": "Medical staff need medical license; new residents need residence permit; students need student ID and transcript; others as announced."
+        },
+        {
+          "q": "Are these charity offers long-term?",
+          "a": "Some are long-term projects, some are seasonal limited; subject to this page announcements."
+        }
+      ]
+    }
+  },
+  "footer": {
+    "contact": "Contact Information",
+    "address": "Address: 123 Some Road, Some District, Taipei City",
+    "phone": "Phone: (02) 1234-5678",
+    "hours": "Business Hours: 11:00-22:00",
+    "quickLinks": "Quick Links",
+    "aboutUs": "About Us",
+    "followUs": "Follow Us",
+    "copyright": "© 2024 Mazu MINI Stone Hot Pot. All rights reserved."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Loading failed, please try again later",
+    "backToTop": "Back to Top",
+    "hamburger": "Open Menu"
+  }
+}

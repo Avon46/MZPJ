@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="麻煮MINI石頭火鍋 - 提供獨門麻辣牛奶小鍋、招牌紅油麻辣小鍋等特色美食，結合愛心公益回饋社會">
+  <meta name="keywords" content="麻煮,MINI石頭火鍋,麻辣鍋,小火鍋,愛心公益,台北美食">
+  <meta name="author" content="麻煮MINI石頭火鍋">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Google Site Verification -->
+  <meta name="google-site-verification" content="qo9bYhV0lEi6k5a0TkTNH8Ogq6YgzqhN_m31TvpAGFw" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="麻煮MINI石頭火鍋 - 首頁">
+  <meta property="og:description" content="麻煮MINI石頭火鍋 - 提供獨門麻辣牛奶小鍋、招牌紅油麻辣小鍋等特色美食，結合愛心公益回饋社會">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="static/img/logo/首頁大圖.jpg">
+  <meta property="og:site_name" content="麻煮MINI石頭火鍋">
+  
+  <!-- 結構化資料 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "麻煮MINI石頭火鍋",
+    "description": "提供獨門麻辣牛奶小鍋、招牌紅油麻辣小鍋等特色美食的火鍋餐廳",
+    "servesCuisine": "火鍋",
+    "priceRange": "$$",
+    "telephone": "+886-2-xxxx-xxxx",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "台北市",
+      "addressCountry": "台灣"
+    }
+  }
+  </script>
+  
+  <title>麻煮MINI石頭火鍋</title>
+  <link rel="stylesheet" href="static/css/responsive-typography.css">
+  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="stylesheet" href="static/css/i18n.css">
+  <link rel="canonical" href="">
+</head>
+<body>
+
+<header class="header" id="header">
+  <!-- 三欄佈局：左 LOGO，中 導覽，右 語言切換 -->
+  
+  <!-- 左欄：LOGO -->
+  <div class="header__left">
+    <div class="header__logo">
+      <a href="home.html" class="header__logo-link">
+        <picture class="header__logo-picture">
+          <!-- 手機版：使用簡化版 logo -->
+          <source media="(max-width: 575px)" 
+                  srcset="static/img/logo/MAZU.webp 1x, static/img/logo/MAZU.webp 2x">
+          <!-- 平板和桌機版：使用完整版 logo -->
+          <source media="(min-width: 576px)" 
+                  srcset="static/img/logo/MAZU.webp 1x, static/img/logo/MAZU.webp 2x">
+          <!-- 備用圖片 -->
+          <img src="static/img/logo/MAZU.webp"
+               alt="麻煮logo" class="header__logo-img" loading="lazy">
+        </picture>
+      </a>
+    </div>
+  </div>
+
+  <!-- 三狀態響應式導覽 -->
+  <!-- 桌機版導覽 (≥1280px) -->
+  <nav class="nav--desktop" aria-label="主要導覽">
+    <ul class="header__nav-list">
+      <li class="header__nav-item"><a href="about.html" class="header__nav-link" data-i18n="nav.about">關於麻煮</a></li>
+      <li class="header__nav-item"><a href="menu.html" class="header__nav-link" data-i18n="nav.menu">菜單資訊</a></li>
+      <li class="header__nav-item"><a href="news.html" class="header__nav-link" data-i18n="nav.news">麻煮快訊</a></li>
+      <li class="header__nav-item"><a href="love.html" class="header__nav-link" data-i18n="nav.love">愛心公益</a></li>
+    </ul>
+  </nav>
+  
+  <!-- 平板版導覽 (768px-1279px) -->
+  <nav class="nav--tablet" aria-label="主要導覽">
+    <ul class="header__nav-list">
+      <li class="header__nav-item"><a href="about.html" class="header__nav-link" data-i18n="nav.about">關於麻煮</a></li>
+      <li class="header__nav-item"><a href="menu.html" class="header__nav-link" data-i18n="nav.menu">菜單資訊</a></li>
+      <li class="header__nav-item"><a href="news.html" class="header__nav-link" data-i18n="nav.news">麻煮快訊</a></li>
+      <li class="header__nav-item"><a href="love.html" class="header__nav-link" data-i18n="nav.love">愛心公益</a></li>
+    </ul>
+  </nav>
+
+  <!-- 右欄：漢堡選單 + 語言切換 -->
+  <div class="header__right">
+    <!-- 漢堡選單 (手機版顯示) -->
+    <button class="header__hamburger" id="hamburger" aria-label="開啟選單"
+            aria-controls="mobile-drawer" aria-expanded="false" data-i18n-attr="aria-label:common.hamburger">
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+    </button>
+
+    <!-- 語言切換 -->
+    <div class="header__language">
+      <div class="lang-dropdown" role="group" aria-label="語言切換">
+        <button class="lang-dropdown__toggle" aria-haspopup="true" aria-expanded="false">
+          <img src="static/img/logo/world.jpg" alt="世界圖標" class="header__icon-img" loading="lazy">
+          <span class="lang-dropdown__current">中</span>
+        </button>
+      <ul class="lang-dropdown__menu" role="menu">
+        <li role="none">
+          <button class="lang-dropdown__item lang-dropdown__item--active" role="menuitem" lang="zh-Hant" data-lang="zh">
+            <span class="lang-dropdown__flag">🇹🇼</span>
+            <span class="lang-dropdown__text">中文</span>
+          </button>
+        </li>
+        <li role="none">
+          <button class="lang-dropdown__item" role="menuitem" lang="en" data-lang="en">
+            <span class="lang-dropdown__flag">🇺🇸</span>
+            <span class="lang-dropdown__text">English</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<!-- 手機版抽屜導覽 -->
+<nav class="nav--mobile" id="mobile-drawer" aria-hidden="true" aria-label="手機版主要導覽">
+  <!-- 1. 標頭區域 -->
+  <div class="drawer-header">
+    <div class="drawer-brand">
+      <a href="home.html" class="drawer-logo" aria-label="回到首頁">
+        <picture>
+          <source srcset="static/img/logo/MAZU.webp" type="image/webp">
+          <img src="static/img/logo/MAZU.webp" alt="麻煮MINI石頭火鍋" class="drawer-logo-img">
+        </picture>
+      </a>
+    </div>
+    <button class="drawer-close" id="drawer-close" aria-label="關閉選單" 
+            aria-controls="mobile-drawer" data-i18n-attr="aria-label:common.closeMenu">
+      ✕
+    </button>
+  </div>
+
+  <!-- 2. 主選單 -->
+  <ul class="header__nav-list">
+    <li class="header__nav-item"><a href="about.html" class="header__nav-link" data-i18n="nav.about">關於麻煮</a></li>
+    <li class="header__nav-item"><a href="menu.html" class="header__nav-link" data-i18n="nav.menu">菜單資訊</a></li>
+    <li class="header__nav-item"><a href="news.html" class="header__nav-link" data-i18n="nav.news">麻煮快訊</a></li>
+    <li class="header__nav-item"><a href="love.html" class="header__nav-link" data-i18n="nav.love">愛心公益</a></li>
+  </ul>
+
+  <!-- 3. 底部區域 -->
+  <div class="drawer-footer">
+    <!-- 語言切換列 -->
+    <div class="drawer-controls">
+      <div class="drawer-language">
+        <span class="language-icon">🌐</span>
+        <button class="lang-option active" data-lang="zh" lang="zh">中</button>
+        <span class="lang-separator">|</span>
+        <button class="lang-option" data-lang="en" lang="en">EN</button>
+      </div>
+    </div>
+
+    <!-- 社群列 -->
+    <div class="drawer-social">
+      <a href="https://www.facebook.com/mazustonehotpot" target="_blank" rel="noopener noreferrer" class="social-link">
+        <span class="social-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#1877F2">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </span>
+        <span>麻煮FB粉絲專頁</span>
+      </a>
+
+      <a href="https://www.google.com/maps/place/%E9%BA%BB%E7%85%AE%E8%BF%B7%E4%BD%A0%E7%9F%B3%E9%A0%AD%E9%8D%8B+-+%E5%85%AC%E9%A4%A8%E5%BA%97/@25.0124864,121.5329133,17z/data=!3m1!4b1!4m6!3m5!1s0x3442a984ad026c2b:0x13c6677a196768d7!8m2!3d25.0124864!4d121.5354882!16s%2Fg%2F11qs93qvks?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="social-link">
+        <span class="social-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2C15.87 2 19 5.13 19 9C19 14.25 12 22 12 22S5 14.25 5 9C5 5.13 8.13 2 12 2Z" fill="#EA4335"/>
+            <circle cx="12" cy="9" r="2.5" fill="#FFFFFF"/>
+          </svg>
+        </span>
+        <span>100台北市中正區汀州路三段273號</span>
+      </a>
+    </div>
+
+                    <!-- 版權 -->
+                <div class="drawer-copyright">
+                  © Powered and secured by MISS-TEPPAN
+                </div>
+  </div>
+</nav>
+
+<!-- 背景遮罩 -->
+<div class="backdrop" id="backdrop" aria-hidden="true"></div>
+
+<main class="main">
+  <section class="hero">
+    <!-- 注意：這個 div 背景圖請在 CSS 用 background 設定，見下方說明 -->
+    <div class="hero__banner"></div>
+
+          <div class="hero__description">
+        <p class="hero__description-title" data-i18n="home.hero.title"><u>與你分享</u></p>
+        <p class="hero__description-subtitle" data-i18n="home.hero.subtitle">【源自台灣信仰媽祖為靈感，傳統石頭小火鍋結合多元麻香，帶來台式熱騰騰的幸福滋味。</p>
+        <a href="about.html#brand-story" class="hero__cta-btn" data-i18n="home.hero.cta">了解更多品牌故事</a>
+      </div>
+  </section>
+
+  <!-- 三大賣點區 -->
+  <section class="usp-section">
+    <div class="usp-container">
+      <div class="usp-item">
+        <div class="usp-icon">🍲</div>
+        <h3 class="usp-title" data-i18n="home.usp.item1.title">個人石頭鍋</h3>
+        <p class="usp-description" data-i18n="home.usp.item1.description">獨享美味，一人也能享受石頭火鍋的樂趣</p>
+      </div>
+      <div class="usp-item">
+        <div class="usp-icon">🌊</div>
+        <h3 class="usp-title" data-i18n="home.usp.item2.title">海洋守護品牌精神</h3>
+        <p class="usp-description" data-i18n="home.usp.item2.description">傳承媽祖精神，共享善行美德</p>
+      </div>
+      <div class="usp-item">
+        <div class="usp-icon">🥬</div>
+        <h3 class="usp-title" data-i18n="home.usp.item3.title">安心食材</h3>
+        <p class="usp-description" data-i18n="home.usp.item3.description">嚴選新鮮食材，為您把關每一口美味</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 快訊預覽區 -->
+  <section class="news-preview-section">
+    <div class="news-preview-container">
+      <h2 class="news-preview-title" data-i18n="home.news.title">最新快訊</h2>
+              <div class="news-preview-list" id="news-preview-list">
+          <!-- 新聞卡片將由 JavaScript 動態生成 -->
+        </div>
+      <div class="news-preview-cta">
+        <a href="news.html#latest" class="news-preview-cta-btn" data-i18n="home.news.cta">看全部快訊</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 行動導流區 -->
+  <section class="cta-section">
+    <div class="cta-container">
+      <h2 class="cta-title" data-i18n="home.cta.title">立即行動</h2>
+      <div class="cta-buttons">
+        <a href="about.html#store-info" class="cta-btn cta-btn--store">
+          <div class="cta-btn-icon">🏪</div>
+          <span class="cta-btn-text" data-i18n="home.cta.store">找門市</span>
+        </a>
+        <a href="menu.html" class="cta-btn cta-btn--menu">
+          <div class="cta-btn-icon">📋</div>
+          <span class="cta-btn-text" data-i18n="home.cta.menu">菜單</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="company-info">
+    <h2 class="company-info__title" data-i18n="home.company">覓        食         鐵        邦        美        食        集        團        關        係        企        業</h2>
+  </section>
+
+  <!-- 關係企業 Logo：建議用迴圈產生；先給靜態版 -->
+  <section class="partners">
+    <a href="https://miss-blog-backend-92eb6.web.app/" target="_blank" rel="noopener noreferrer" class="partners__link" title="覓食鐵板燒">
+      <img class="partners__logo" src="static/img/logo/MISS.webp" alt="覓食logo" loading="lazy">
+    </a>
+    <a href="http://www.sltpanyaki.com.tw/front/bin/home.phtml" target="_blank" rel="noopener noreferrer" class="partners__link" title="香蓮鐵板燒">
+      <img class="partners__logo" src="static/img/logo/SLT.webp" alt="香蓮logo" loading="lazy">
+    </a>
+    <a href="http://www.chouchaotzu.com/" target="_blank" rel="noopener noreferrer" class="partners__link" title="周照子鐵板燒">
+      <img class="partners__logo" src="static/img/logo/CCT.webp" alt="周照子logo" loading="lazy">
+    </a>
+    <a href="https://www.facebook.com/ganmeialley" target="_blank" rel="noopener noreferrer" class="partners__link" title="甘妹弄堂">
+      <img class="partners__logo" src="static/img/logo/GM.webp" alt="甘妹弄堂logo" loading="lazy">
+    </a>
+    <a href="https://www.chiyou.com.tw/" target="_blank" rel="noopener noreferrer" class="partners__link" title="嗤尤">
+      <img class="partners__logo" src="static/img/logo/CY.webp" alt="嗤尤logo" loading="lazy">
+    </a>
+    <a href="http://www.fullwant.com.tw/" target="_blank" rel="noopener noreferrer" class="partners__link" title="扶旺號">
+      <img class="partners__logo" src="static/img/logo/FW.webp" alt="扶旺號logo" loading="lazy">
+    </a>
+    <a href="https://www.showwant.com.tw/" target="_blank" rel="noopener noreferrer" class="partners__link" title="小旺號">
+      <img class="partners__logo" src="static/img/logo/SW.webp" alt="小旺號logo" loading="lazy">
+    </a>
+    <a href="https://www.facebook.com/weiyusteak" target="_blank" rel="noopener noreferrer" class="partners__link" title="威宇">
+      <img class="partners__logo" src="static/img/logo/WY.webp" alt="威宇logo" loading="lazy">
+    </a>
+    <!-- 新增的3個關聯企業 -->
+    <a href="https://www.yan-di.com/" target="_blank" rel="noopener noreferrer" class="partners__link" title="炎弟">
+      <img class="partners__logo" src="static/img/logo/yd.webp" alt="炎弟logo" loading="lazy">
+    </a>
+    <a href="https://www.facebook.com/showmeialley" target="_blank" rel="noopener noreferrer" class="partners__link" title="小妹弄堂">
+      <img class="partners__logo" src="static/img/logo/小妹弄堂.webp" alt="小妹弄堂logo" loading="lazy">
+    </a>
+  </section>
+</main>
+
+<!-- 回到頂部按鈕 -->
+<button class="back-to-top" id="back-to-top" title="回到頂部" data-i18n-attr="title:common.backToTop">↑</button>
+
+<footer class="footer">
+  <p class="footer__text">© Powered and secured by MISS-TEPPAN</p>
+</footer>
+
+<!-- 新聞動態加載腳本 -->
+<script>
+  // 加載首頁新聞預覽（最新3則）
+  async function loadHomeNews() {
+    try {
+      const response = await fetch('/static/news.json');
+      const newsData = await response.json();
+      
+      const newsList = document.getElementById('news-preview-list');
+      if (!newsList) return;
+      
+      // 按日期排序（最新在前），日期相同時按 id 倒序
+      const sortedNews = newsData.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        if (dateA.getTime() === dateB.getTime()) {
+          return b.id - a.id; // 日期相同時，id 大的在前
+        }
+        return dateB - dateA; // 日期新的在前
+      });
+      
+      // 只顯示最新3則
+      const latestNews = sortedNews.slice(0, 3);
+      
+      newsList.innerHTML = latestNews.map(news => `
+        <div class="news-preview-item">
+          <div class="news-preview-item__image">
+            <img src="${news.image}" alt="${news.title}" loading="lazy">
+          </div>
+          <div class="news-preview-item__content">
+            <h3 class="news-preview-item-title">
+              ${news.title}
+            </h3>
+            <p class="news-preview-item-date">${news.date}</p>
+          </div>
+        </div>
+      `).join('');
+      
+    } catch (error) {
+      console.error('加載新聞數據失敗:', error);
+      // 發生錯誤時顯示預設內容
+      const newsList = document.getElementById('news-preview-list');
+      if (newsList) {
+        newsList.innerHTML = '<p style="text-align: center; color: #666;">載入新聞時發生錯誤，請稍後再試。</p>';
+      }
+    }
+  }
+  
+  // 頁面加載完成後執行
+  document.addEventListener('DOMContentLoaded', loadHomeNews);
+</script>
+
+  <!-- 多語切換系統 -->
+  <script src="static/js/i18n.js"></script>
+  
+  <!-- SEO 管理系統 -->
+  <script src="static/js/seo-manager.js"></script>
+  
+  <!-- JavaScript -->
+  <script src="static/js/script.js"></script>
+</body>
+</html>

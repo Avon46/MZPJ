@@ -1,0 +1,82 @@
+/* ===== 視窗觸發動畫樣式 ===== */
+
+/* 數字計數動畫容器 */
+.viewport-counter {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.viewport-counter.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 數字計數動畫 */
+.counter-number {
+  display: inline-block;
+  font-weight: bold;
+  color: var(--color-primary);
+  transition: all 0.3s ease;
+}
+
+.counter-number.is-counting {
+  transform: scale(1.05);
+}
+
+/* 卡片進入動畫 */
+.viewport-card {
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.viewport-card.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* 延遲動畫效果 */
+.viewport-card.delay-1 { transition-delay: 0.1s; }
+.viewport-card.delay-2 { transition-delay: 0.2s; }
+.viewport-card.delay-3 { transition-delay: 0.3s; }
+.viewport-card.delay-4 { transition-delay: 0.4s; }
+.viewport-card.delay-5 { transition-delay: 0.5s; }
+.viewport-card.delay-6 { transition-delay: 0.6s; }
+
+/* 無障礙優化：減少動畫 */
+@media (prefers-reduced-motion: reduce) {
+  .viewport-counter,
+  .viewport-card {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .counter-number {
+    transition: none;
+  }
+}
+
+/* 響應式優化 */
+@media (max-width: 768px) {
+  .viewport-card {
+    transform: translateY(20px) scale(0.98);
+  }
+  
+  .viewport-card.is-visible {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 動畫完成後的狀態 */
+.viewport-counter.animation-complete,
+.viewport-card.animation-complete {
+  /* 動畫完成後的樣式 */
+}
+
+/* 載入狀態 */
+.viewport-counter.is-loading,
+.viewport-card.is-loading {
+  /* 載入中的樣式 */
+}

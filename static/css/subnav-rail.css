@@ -1,0 +1,577 @@
+/* ===== Slim Rail 側邊導覽列樣式 ===== */
+
+/* CSS 變數：可快速微調觸發距離 */
+:root {
+  --subnav-trigger-offset: 80%; /* 觸發點距離 Hero 底部的偏移量，80% 表示從底部上來 20% */
+  --subnav-rail-top-offset: 100px; /* 次導覽列距離 header 的偏移量，從 80px 改為 100px */
+}
+
+/* 哨兵元素樣式 */
+.subnav-trigger {
+  position: absolute;
+  bottom: var(--subnav-trigger-offset);
+  left: 0;
+  width: 100%;
+  height: 1px;
+  pointer-events: none; /* 不影響用戶互動 */
+  z-index: -1; /* 隱藏在背景中 */
+}
+
+/* 愛心公益頁面的觸發器特殊調整 */
+#love-subnav-trigger {
+  bottom: 60%; /* 愛心公益頁面觸發點更早，因為 Hero 區域較短 */
+}
+
+/* 錨點位移一致化：為含 id 的區塊加 scroll-margin-top */
+[id] {
+  scroll-margin-top: calc(var(--header-height, 80px) + 12px);
+}
+
+/* 手機+平板樣式 (<1200px) - 硬性重置，完全一致 */
+@media (max-width: 1199.98px) {
+  /* 硬性重置：清除所有可能殘留的桌機樣式 */
+  #subnav {
+    /* 強制清除 fixed 定位相關 */
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+    bottom: auto !important;
+    
+    /* 強制清除變形和動畫 */
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+    
+    /* 強制清除陰影和邊框 */
+    box-shadow: none !important;
+    border: 0 !important;
+    
+    /* 強制清除 z-index 和層級 */
+    z-index: auto !important;
+    
+    /* 強制清除透明度相關 */
+    opacity: 1 !important;
+    visibility: visible !important;
+    
+    /* 強制清除互動狀態 */
+    pointer-events: auto !important;
+    
+    /* 強制清除尺寸和位置 */
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 8px 12px !important;
+    
+    /* 強制清除背景 */
+    background: transparent !important;
+    
+    /* 強制清除溢出 */
+    overflow: visible !important;
+    
+    /* 強制顯示 */
+    display: block !important;
+  }
+
+  /* 硬性重置：清除所有可能殘留的桌機樣式 */
+  #subnav > ul,
+  #subnav .side-rail__list {
+    /* 強制清除定位 */
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    
+    /* 強制清除變形 */
+    transform: none !important;
+    transition: none !important;
+    
+    /* 強制清除 z-index */
+    z-index: auto !important;
+    
+    /* 強制水平排列 */
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    
+    /* 強制滑動設定 */
+    gap: 12px !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    
+    /* 強制清除樣式 */
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    padding-bottom: 6px !important;
+    
+    /* 強制尺寸 */
+    min-width: max-content !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  /* 硬性重置：清除所有可能殘留的桌機樣式 */
+  #subnav a,
+  #subnav .side-rail__link {
+    /* 強制清除定位 */
+    position: relative !important;
+    
+    /* 強制清除變形 */
+    transform: none !important;
+    transition: all 0.2s ease !important;
+    
+    /* 強制清除 z-index */
+    z-index: auto !important;
+    
+    /* 強制膠囊按鈕樣式 */
+    display: inline-block !important;
+    white-space: nowrap !important;
+    padding: 10px 12px !important;
+    border-radius: 999px !important;
+    
+    /* 強制字體樣式 */
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+    font-weight: 500 !important;
+    
+    /* 強制背景和邊框 */
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid rgba(69, 129, 142, 0.2) !important;
+    color: var(--color-text-secondary) !important;
+    
+    /* 強制清除文字裝飾 */
+    text-decoration: none !important;
+    
+    /* 強制特效 */
+    backdrop-filter: blur(10px) !important;
+    overflow: hidden !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* 強制 hover 狀態 */
+  #subnav a:hover,
+  #subnav .side-rail__link:hover {
+    background: rgba(255, 255, 255, 1) !important;
+    border-color: var(--color-primary) !important;
+    color: var(--color-primary) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(69, 129, 142, 0.2) !important;
+  }
+
+  /* 強制 active 狀態 */
+  #subnav a.is-active,
+  #subnav .side-rail__link.is-active {
+    background: rgba(255, 255, 255, 1) !important;
+    border-color: var(--color-primary) !important;
+    color: var(--color-primary-dark) !important;
+    transform: translateY(-2px) scale(1.05) !important;
+    box-shadow: 0 6px 16px rgba(69, 129, 142, 0.3) !important;
+    font-weight: 600 !important;
+  }
+
+  /* 隱藏滾動條但保持功能 */
+  #subnav > ul::-webkit-scrollbar,
+  #subnav .side-rail__list::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  #subnav > ul,
+  #subnav .side-rail__list {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+
+  /* 強制隱藏桌機版專用元素 */
+  .subnav-trigger,
+  #subnav .side-rail__track,
+  #subnav .side-rail__indicator {
+    display: none !important;
+  }
+
+  /* 強制清除任何可能的 is-visible 類別影響 */
+  #subnav.is-visible {
+    position: static !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  /* 手機+平板斷點：新增 sticky 跟隨效果 */
+  /* 為 #subnav 新增 sticky 定位，讓它在捲到 header 下緣後會跟隨 */
+  #subnav {
+    position: sticky !important;
+    top: calc(var(--header-height, 80px) + 12px) !important;
+    z-index: 100 !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    margin: 0 20px !important;
+    padding: 12px 16px !important;
+    transition: all 0.3s ease !important;
+  }
+
+  /* 確保 sticky 效果正常工作 */
+  #subnav > ul {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 12px !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+
+  #subnav > ul::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  #subnav .side-rail__link {
+    white-space: nowrap !important;
+    padding: 8px 16px !important;
+    border-radius: 20px !important;
+    background: #f8f9fa !important;
+    color: #495057 !important;
+    text-decoration: none !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+    min-height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  #subnav .side-rail__link:hover {
+    background: #e9ecef !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  #subnav .side-rail__link.is-active {
+    background: #f8f9fa !important;
+    color: #495057 !important;
+    border: 2px solid #45818E !important;
+    box-shadow: 0 2px 8px rgba(69, 129, 142, 0.2) !important;
+    font-weight: 600 !important;
+  }
+
+  /* 移除桌面版的固定定位相關樣式 */
+  #subnav .side-rail__track,
+  #subnav .side-rail__indicator {
+    display: none !important;
+  }
+}
+
+/* 手機版專用樣式（<768px）- 美觀的可滑動 tab bar */
+@media (max-width: 767.98px) {
+  #subnav.subnav {
+    /* 整體容器樣式 */
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(20px) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+    margin: 0 16px !important;
+    padding: 8px 16px !important;
+    /* 固定高度 */
+    height: 48px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  
+  #subnav.subnav > ul {
+    display: flex !important;
+    flex-wrap: nowrap !important;        /* 不允許換行 */
+    overflow-x: auto !important;         /* 超出時橫向滾動 */
+    -webkit-overflow-scrolling: touch !important;
+    gap: 8px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    white-space: nowrap !important;      /* 文字不斷行 */
+    /* 隱藏滾動條 */
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+    /* 確保容器填滿 */
+    width: 100% !important;
+    height: 100% !important;
+    align-items: center !important;
+  }
+  
+  #subnav.subnav > ul::-webkit-scrollbar {
+    display: none !important;
+  }
+  
+  #subnav.subnav a {
+    flex-shrink: 0 !important;           /* 不要被擠壓縮小到掉行 */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+    padding: 8px 12px !important;        /* 左右 padding 至少 12px */
+    border-radius: 20px !important;      /* 膠囊形狀 */
+    font-size: 14px !important;          /* 字體大小 14px */
+    line-height: 1.2 !important;
+    font-weight: 500 !important;
+    /* 觸控優化 */
+    min-height: 32px !important;
+    min-width: 44px !important;
+    /* 視覺效果 */
+    background: #f8f9fa !important;
+    color: #6c757d !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+    /* 陰影效果 */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+    /* 確保觸控友好 */
+    touch-action: manipulation !important;
+    /* 邊框 */
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  }
+  
+  /* 手機版活動狀態樣式 - 主色高亮 */
+  #subnav.subnav a.is-active {
+    background: #45818E !important;      /* 主色底色 */
+    color: white !important;             /* 白色文字 */
+    border-color: #45818E !important;   /* 主色邊框 */
+    box-shadow: 0 4px 16px rgba(69, 129, 142, 0.3) !important; /* 主色陰影 */
+    font-weight: 600 !important;
+    /* 移除邊框，讓底色更突出 */
+    border: none !important;
+  }
+  
+  /* 手機版 hover 效果 */
+  #subnav.subnav a:hover:not(.is-active) {
+    background: #e9ecef !important;
+    color: #495057 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  /* 手機版 focus 效果 */
+  #subnav.subnav a:focus-visible {
+    outline: 2px solid #45818E !important;
+    outline-offset: 2px !important;
+  }
+}
+
+/* 桌機版樣式（≥1200px） - 保留原有行為，不影響任何樣式 */
+@media (min-width: 1200px) {
+  #subnav {
+    position: fixed;
+    top: calc(var(--header-height, 80px) + var(--subnav-rail-top-offset));
+    right: 20px;
+    z-index: 500;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(20px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    /* 與內容保持安全距離 */
+    margin-right: 32px;
+    /* 避免 layout shift */
+    width: 160px; /* 縮小寬度 */
+    height: auto;
+    pointer-events: none; /* 初始狀態不可互動 */
+    /* 確保不被遮擋 */
+    overflow: visible;
+  }
+
+  /* 顯示狀態 */
+  #subnav.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    pointer-events: auto; /* 顯示後可互動 */
+  }
+
+  /* 導軌背景 */
+  #subnav .side-rail__track {
+    position: relative;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, 
+      rgba(69, 129, 142, 0.1) 0%, 
+      rgba(69, 129, 142, 0.3) 50%, 
+      rgba(69, 129, 142, 0.1) 100%);
+    border-radius: 2px;
+    margin: 0 auto;
+  }
+
+  /* 導軌裝飾點 */
+  #subnav .side-rail__track::before,
+  #subnav .side-rail__track::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    transform: translateX(-50%);
+  }
+
+  #subnav .side-rail__track::before {
+    top: -4px;
+  }
+
+  #subnav .side-rail__track::after {
+    bottom: -4px;
+  }
+
+  /* 導覽項目容器 */
+  #subnav .side-rail__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+  }
+
+  /* 導覽項目 */
+  #subnav .side-rail__item {
+    margin: 0;
+    position: relative;
+  }
+
+  /* 導覽連結 */
+  #subnav .side-rail__link {
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 8px 16px 8px 24px;
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(69, 129, 142, 0.15);
+    border-radius: 20px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    white-space: nowrap;
+    transition: all var(--transition-normal);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+    /* 常態狀態加極淡底與髮絲線，提升對比 */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  #subnav .side-rail__link:hover {
+    background: rgba(255, 255, 255, 1);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    transform: translateX(-4px);
+    box-shadow: 0 4px 12px rgba(69, 129, 142, 0.15);
+  }
+
+  #subnav .side-rail__link:focus {
+    outline: none;
+  }
+
+  #subnav .side-rail__link:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  #subnav .side-rail__link.is-active {
+    background: rgba(255, 255, 255, 1);
+    border-color: var(--color-primary);
+    color: var(--color-primary-dark);
+    transform: translateX(-4px) scale(1.03);
+    box-shadow: 0 6px 16px rgba(69, 129, 142, 0.25);
+    font-weight: 600;
+  }
+
+  /* 激活狀態右側主色指示條 */
+  #subnav .side-rail__link.is-active::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--color-primary);
+    border-radius: 0 20px 20px 0;
+    box-shadow: 0 0 8px rgba(69, 129, 142, 0.4);
+  }
+
+  /* 導軌指示器 */
+  #subnav .side-rail__indicator {
+    position: absolute;
+    left: -8px;
+    width: 20px;
+    height: 20px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform var(--transition-normal);
+    box-shadow: 0 2px 8px rgba(69, 129, 142, 0.3);
+  }
+
+  /* 激活狀態指示器 */
+  #subnav .side-rail__item.is-active .side-rail__indicator {
+    transform: scale(1);
+  }
+
+  /* 動畫效果 */
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* 無障礙優化 */
+  #subnav .side-rail__link:focus {
+    outline: none;
+  }
+
+  #subnav .side-rail__link:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  /* 觸控優化 */
+  @media (hover: none) and (pointer: coarse) {
+    #subnav .side-rail__link {
+      min-height: 44px;
+      padding: 12px 20px 12px 28px;
+    }
+    
+    #subnav .side-rail__link:hover {
+      transform: none;
+    }
+    
+    #subnav .side-rail__link.is-active {
+      transform: none;
+    }
+  }
+}
+
+/* Logo 外框和對齊問題修復 */
+.header__logo {
+  border: none !important; /* 清除 Logo 外框 */
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.header__logo-img {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* 確保漢堡鈕與 Logo 垂直置中對齊 */
+.header__nav-toggle {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+}

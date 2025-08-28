@@ -1,0 +1,333 @@
+/* ===== 響應式次導覽列設計 ===== */
+
+/* ===== 通用基礎樣式 ===== */
+.subnav__list {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden; /* 確保只有水平滑動 */
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x; /* 允許水平滑動 */
+  gap: clamp(8px, 2vw, 16px);
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  width: 100%;
+  min-width: 100%; /* 確保容器寬度 */
+  align-items: center;
+  justify-content: flex-start;
+  /* 隱藏滾動條但保持滑動功能 */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+}
+
+/* 在小於平板的設備上確保滑動功能 */
+@media (max-width: 991px) {
+  .subnav__list {
+    /* 確保內容總寬度超過容器，觸發滑動 */
+    min-width: max-content;
+  }
+}
+
+.subnav__list::-webkit-scrollbar {
+  display: none;
+}
+
+.subnav__item {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.subnav__link {
+  display: inline-block;
+  white-space: nowrap;
+  padding: clamp(6px, 1.5vw, 12px) clamp(12px, 3vw, 20px);
+  border-radius: clamp(16px, 4vw, 24px);
+  font-size: clamp(12px, 3.5vw, 16px);
+  line-height: 1.3;
+  font-weight: 500;
+  text-decoration: none;
+  color: #6c757d;
+  background: #f8f9fa;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+  min-width: fit-content; /* 確保最小寬度 */
+}
+
+/* 通用 Hover 效果 */
+.subnav__link:hover:not(.is-active) {
+  background: #e9ecef;
+  color: #495057;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+/* 通用選中狀態 */
+.subnav__link.is-active {
+  background: #45818E;
+  color: white;
+  border-color: #45818E;
+  font-weight: 600;
+}
+
+/* Focus 效果 */
+.subnav__link:focus-visible {
+  outline: 2px solid #45818E;
+  outline-offset: 2px;
+}
+
+/* ===== 基礎樣式 - 小手機版 (≤575px) ===== */
+@media (max-width: 575px) {
+  .subnav {
+    position: sticky;
+    top: calc(var(--header-height, 80px) + 8px); /* 基礎 fallback */
+    z-index: 200;
+    margin: 0 0 16px 0; /* 手機版做滿寬度，左右無邊距 */
+    padding: 8px 16px; /* 內距改到這裡控制 */
+    display: flex;
+    align-items: center;
+    overflow: visible; /* 允許內部滑動 */
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    border-radius: 0; /* 手機版不要圓角，做滿寬度 */
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    border: none; /* 手機版移除邊框 */
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+}
+
+/* ===== 超小手機優化 (≤375px) ===== */
+@media (max-width: 375px) {
+  .subnav {
+    top: calc(var(--header-height, 70px) + 6px); /* 小手機減少間距，header-height: 70px */
+    padding: 6px 12px; /* 小手機減少內距 */
+  }
+  
+  .subnav__list {
+    gap: clamp(6px, 2vw, 12px); /* 小手機減少間距 */
+  }
+  
+  .subnav__link {
+    font-size: clamp(11px, 3.5vw, 14px); /* 小手機調整字體 */
+    padding: clamp(5px, 1.2vw, 10px) clamp(10px, 2.5vw, 16px); /* 小手機調整內距 */
+  }
+}
+
+/* ===== 小手機優化 (376px-575px) ===== */
+@media (min-width: 376px) and (max-width: 575px) {
+  .subnav {
+    top: calc(var(--header-height, 75px) + 7px); /* header-height: 75px */
+    padding: 7px 14px;
+  }
+  
+  .subnav__link {
+    font-size: clamp(12px, 3.2vw, 15px);
+    padding: clamp(6px, 1.3vw, 11px) clamp(12px, 2.8vw, 18px);
+  }
+}
+
+/* ===== 中等手機優化 (576px-767px) ===== */
+@media (min-width: 576px) and (max-width: 767px) {
+  .subnav {
+    position: sticky;
+    top: calc(var(--header-height, 80px) + 15px); /* 進一步增加間距，確保不被遮住 */
+    z-index: 200;
+    margin: 0 0 16px 0; /* 做滿寬度 */
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    overflow: visible; /* 允許內部滑動 */
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    border-radius: 0; /* 做滿寬度無圓角 */
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .subnav__link {
+    font-size: clamp(13px, 3vw, 16px);
+    padding: clamp(7px, 1.4vw, 12px) clamp(14px, 3vw, 20px);
+  }
+}
+
+/* ===== 平板版樣式 (768px - 991px) ===== */
+@media (min-width: 768px) and (max-width: 991px) {
+  .subnav {
+    position: sticky;
+    top: calc(var(--header-height, 85px) + 10px); /* 平板版增加間距，header-height: 85px */
+    z-index: 200;
+    margin: 0 20px 16px 20px; /* 平板版恢復左右邊距，避免被切到 */
+    padding: 10px 16px; /* 平板版稍微增加上下內距 */
+    display: flex;
+    align-items: center;
+    overflow: visible; /* 允許內部滑動 */
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    border-radius: clamp(16px, 3vw, 20px); /* 平板版恢復圓角 */
+    border: 1px solid rgba(0, 0, 0, 0.05); /* 平板版恢復邊框 */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); /* 平板版增強陰影 */
+  }
+  
+  .subnav__list {
+    gap: clamp(12px, 2.5vw, 20px); /* 平板版增加間距 */
+    padding: 0 8px; /* 平板版內部增加左右內距 */
+  }
+  
+  .subnav__link {
+    font-size: clamp(14px, 2.5vw, 18px); /* 平板版調整字體大小 */
+    padding: clamp(8px, 1.8vw, 14px) clamp(16px, 3.5vw, 24px); /* 平板版調整內距 */
+  }
+}
+
+/* ===== 小桌機版垂直導覽 (992px-1199px) ===== */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .subnav {
+    position: fixed;
+    top: calc(50% - 20px); /* 稍微上移，避免太靠近底部 */
+    right: 20px; /* 縮到最窄時減少右邊距 */
+    transform: translateY(-50%);
+    margin: 0;
+    padding: 14px 6px; /* 縮小內距適應窄螢幕 */
+    width: auto;
+    height: auto;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 14px; /* 稍微減小圓角 */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    /* 初始隱藏 */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+}
+
+/* ===== 大桌機版垂直導覽 (≥1200px) ===== */
+@media (min-width: 1200px) {
+  .subnav {
+    position: fixed;
+    top: 50%;
+    right: 24px;
+    transform: translateY(-50%);
+    margin: 0;
+    padding: 16px 8px;
+    width: auto;
+    height: auto;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    /* 初始隱藏 */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+}
+
+/* ===== 小桌機版列表和連結樣式 (992px-1199px) ===== */
+@media (min-width: 992px) and (max-width: 1199px) {
+  /* Hero 後顯示 */
+  .subnav.is-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .subnav__list {
+    flex-direction: column;
+    gap: 10px; /* 小桌機版緊湊間距 */
+    width: auto;
+    overflow-x: visible;
+    justify-content: center;
+  }
+
+  .subnav__link {
+    font-size: 13px; /* 小桌機版較小字體 */
+    min-width: 100px; /* 小桌機版較窄按鈕 */
+    text-align: center;
+    padding: 10px 12px; /* 小桌機版較小內距 */
+    border-radius: 18px; /* 小桌機版較小圓角 */
+  }
+
+  /* 桌機版 hover 效果 */
+  .subnav__link:hover:not(.is-active) {
+    transform: translateX(-3px); /* 小桌機版較小移動 */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+  }
+}
+
+/* ===== 大桌機版樣式 (≥1200px) ===== */
+@media (min-width: 1200px) {
+  .subnav {
+    right: 48px;
+    padding: 20px 12px;
+  }
+
+  /* Hero 後顯示 */
+  .subnav.is-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .subnav__list {
+    flex-direction: column;
+    gap: 16px;
+    width: auto;
+    overflow-x: visible;
+    justify-content: center;
+  }
+
+  .subnav__link {
+    font-size: 16px;
+    min-width: 140px;
+    text-align: center;
+    padding: 14px 20px;
+    border-radius: 20px;
+  }
+
+  /* 桌機版 hover 效果增強 */
+  .subnav__link:hover:not(.is-active) {
+    transform: translateX(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* 動畫優化 */
+@media (prefers-reduced-motion: reduce) {
+  .subnav,
+  .subnav__link {
+    transition: none;
+  }
+  
+  .subnav__link:hover:not(.is-active) {
+    transform: none;
+  }
+}
+
+/* 高對比模式支援 */
+@media (prefers-contrast: high) {
+  .subnav {
+    background: rgba(255, 255, 255, 1);
+    border: 2px solid #000;
+  }
+  
+  .subnav__link {
+    border: 2px solid #000;
+    background: #fff;
+    color: #000;
+  }
+  
+  .subnav__link.is-active {
+    background: #000;
+    color: #fff;
+  }
+}
